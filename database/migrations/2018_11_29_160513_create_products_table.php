@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
                     $table->integer('shop_id')->unsigned();
                     $table->foreign('shop_id')->references('id')->on('shops')->onDelete('restrict')->onUpdate('cascade');
                     $table->integer('author_id')->unsigned();
-                    $table->foreign('author_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
+                    $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
                     $table->text('description')->nullable();
                     $table->text('gallery')->nullable();
                     $table->boolean('disabled')->default(0);

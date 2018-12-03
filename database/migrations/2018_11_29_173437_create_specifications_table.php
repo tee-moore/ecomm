@@ -13,12 +13,12 @@ class CreateAttributeVariationTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('attribute_variation')) {
-            Schema::create('attribute_variation', function (Blueprint $table) {
-                $table->integer('attribute_id')->unsigned();
-                $table->foreign('attribute_id')->references('id')->on('attributes');
+        if (!Schema::hasTable('specifications')) {
+            Schema::create('specifications', function (Blueprint $table) {
                 $table->integer('variation_id')->unsigned();
                 $table->foreign('variation_id')->references('id')->on('variations');
+                $table->integer('attribute_id')->unsigned();
+                $table->foreign('attribute_id')->references('id')->on('attributes');
                 $table->integer('value_id')->unsigned();
                 $table->foreign('value_id')->references('id')->on('attribute_values');
                 $table->engine = 'InnoDB';
@@ -35,6 +35,6 @@ class CreateAttributeVariationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_variation');
+        Schema::dropIfExists('specifications');
     }
 }

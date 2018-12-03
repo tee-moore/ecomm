@@ -21,7 +21,7 @@ class CreateVariationsTable extends Migration
                 $table->string('sku', 255)->default('');
                 $table->string('image', 255)->default('');
                 $table->decimal('price', 8, 2)->default(0);
-                $table->decimal('discount_price', 8, 2)->default();
+                $table->decimal('discount_price', 8, 2)->default(0);
                 $table->integer('quantity')->unsigned()->default(0);
                 $table->boolean('disabled')->default(0);
                 $table->boolean('deleted')->default(0);
