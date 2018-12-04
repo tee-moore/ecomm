@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AbstractClass\ProductAbstract;
+
+use App\Helpers\ProductSimple;
+use App\Helpers\ProductVariant;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +25,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ProductSimple $product)
     {
-        return view('home');
+        return $product->getType();
     }
 }
