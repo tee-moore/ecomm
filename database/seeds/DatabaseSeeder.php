@@ -12,14 +12,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            RolesTableSeeder::class,
-            UsersTableSeeder::class,
-            ShopsTableSeeder::class,
-            ProductsTableSeeder::class,
-            VariationsTableSeeder::class,
-            AtributesTableSeeder::class,
-            AtributeValuesTableSeeder::class,
-            AttributeVariationTableSeeder::class
+//            RolesTableSeeder::class,
+//            UsersTableSeeder::class,
+//            ShopsTableSeeder::class,
+//            ProductsTableSeeder::class,
+//            VariationsTableSeeder::class,
+//            AtributesTableSeeder::class,
+//            AtributeValuesTableSeeder::class,
+//            AttributeVariationTableSeeder::class,
+//            TaxonomiesTableSeeder::class,
+//            VariationTaxonomyTableSeeder::class,
         ]);
     }
 }
