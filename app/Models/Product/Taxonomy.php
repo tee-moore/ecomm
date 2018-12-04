@@ -6,12 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Taxonomy extends Model
 {
-    protected $table = "taxonomies";
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name', 'type', 'parent_id'
     ];
 
+    /**
+     * The variations that belong to the taxonomy.
+     */
     public function variations()
     {
         return $this->belongsToMany(Variation::class);
