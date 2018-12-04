@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\Brand;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
@@ -32,13 +33,19 @@ class Product extends Model
         ];
     }
 
+    /**
+     * Get the brand that owns the product.
+     */
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    /**
+     * Get the variations for the product.
+     */
     public function variations()
     {
         return $this->hasMany(Variation::class);
-    }
-
-    public function getProducts(Product $product)
-    {
-
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShopsTable extends Migration
+class CreateBrandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateShopsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('shops')) {
-            Schema::create('shops', function (Blueprint $table) {
+        if (!Schema::hasTable('brands')) {
+            Schema::create('brands', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 255)->unique();
                 $table->string('slug', 255)->unique();
@@ -34,6 +34,6 @@ class CreateShopsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shops');
+        Schema::dropIfExists('brands');
     }
 }

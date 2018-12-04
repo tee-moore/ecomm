@@ -18,9 +18,9 @@ class CreateProductsTable extends Migration
                     $table->increments('id');
                     $table->string('name', 255)->index();
                     $table->string('slug', 255)->index();
-                    $table->integer('shop_id')->unsigned();
-                    $table->foreign('shop_id')->references('id')->on('shops')->onDelete('restrict')->onUpdate('cascade');
-                    $table->integer('author_id')->unsigned();
+                    $table->integer('brand_id')->unsigned();
+                    $table->foreign('brand_id')->references('id')->on('brands')->onDelete('restrict')->onUpdate('cascade');
+                    $table->integer('user_id')->unsigned();
                     $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
                     $table->text('description')->nullable();
                     $table->text('gallery')->nullable();

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AttributeVariationTableSeeder extends Seeder
+class SpecificationsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class AttributeVariationTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('attribute_variation')->insert([
+        DB::table('specifications')->insert([
             ['attribute_id' => 1, 'variation_id' => 1, 'value_id' => 2],
             ['attribute_id' => 1, 'variation_id' => 2, 'value_id' => 1],
             ['attribute_id' => 1, 'variation_id' => 3, 'value_id' => 3],
