@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\AbstractClass\ProductAbstract;
-
 use App\Helpers\ProductSimple;
 use App\Helpers\ProductVariant;
+use App\Models\Product\Variation;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,6 +26,9 @@ class HomeController extends Controller
      */
     public function index(ProductSimple $product)
     {
-        return $product->getType();
+        $variation = Variation::find(5);
+        foreach ($variation->taxonomies as $taxonomy) {
+            echo $taxonomy->name.'-'.$taxonomy->type.'<br>';
+        }
     }
 }

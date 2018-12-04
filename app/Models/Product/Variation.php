@@ -21,4 +21,9 @@ class Variation extends Model
     {
         return $this->hasMany(Specification::class);
     }
+
+    public function taxonomies()
+    {
+        return $this->belongsToMany(Taxonomy::class);
+    }
 }
