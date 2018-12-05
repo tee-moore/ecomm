@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Helpers\ProductSimple;
 use App\Helpers\ProductVariant;
 use App\Models\Product\Variation;
-use Illuminate\Http\Request;
+use App\Models\Brand;
 
-class HomeController extends Controller
+class HomeController extends MainController
 {
     /**
      * Create a new controller instance.
@@ -20,15 +21,15 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     *
+     *
      */
-    public function index(ProductSimple $product)
+    public function index()
     {
-        $variation = Variation::find(5);
-        foreach ($variation->taxonomies as $taxonomy) {
-            echo $taxonomy->name.'-'.$taxonomy->type.'<br>';
+        $brands = Brand::select(['name','slug'])->get();
+        foreach ($brands as $brand) {
+            echo "<a href='brand/$brand->slug'>$brand->name</a><br>";
         }
     }
 }

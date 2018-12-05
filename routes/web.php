@@ -13,4 +13,16 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/products', 'ProductController@index')->name('products.index');
+Route::get('/product/{product}', 'ProductController@show')->where('product', '[A-Za-z]+')->name('product.show');
+
+Route::get('/brands', 'BrandController@index')->name('brands.index');
+Route::get('/brand/{brand}', 'BrandController@show')->where('brand', '[A-Za-z]+')->name('brand.show');
+
+Route::get('/categories', 'CategoryController@index')->name('categories.index');
+Route::get('/category/{category}', 'CategoryController@show')->where('category', '[A-Za-z]+')->name('category.show');
+
+Route::get('/tags', 'TagController@index')->name('tags.index');
+Route::get('/tag/{tag}', 'TagController@show')->where('tag', '[A-Za-z]+')->name('tag.show');
