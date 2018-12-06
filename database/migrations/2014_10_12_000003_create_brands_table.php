@@ -20,6 +20,10 @@ class CreateBrandsTable extends Migration
                 $table->string('slug', 255)->unique();
                 $table->string('logo', 255)->default('');
                 $table->text('description')->nullable();
+                $table->integer('owner')->unsigned();
+                $table->foreign('owner')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
+                $table->integer('manager')->unsigned();
+                $table->foreign('manager')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
                 $table->engine = 'InnoDB';
                 $table->charset = 'utf8';
                 $table->collation = 'utf8_unicode_ci';

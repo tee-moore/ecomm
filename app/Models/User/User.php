@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Brand;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -36,4 +37,20 @@ class User extends Authenticatable
     protected $attributes = [
         'role_id' => 4,
     ];
+
+    /**
+     * Get the brand record associated with the user as ownre.
+     */
+    public function BrandOwner()
+    {
+        return $this->hasOne(Brand::class, 'owner');
+    }
+
+    /**
+     * Get the brand record associated with the user as manager.
+     */
+    public function BrandManeger()
+    {
+        return $this->hasOne(Brand::class, 'manager');
+    }
 }

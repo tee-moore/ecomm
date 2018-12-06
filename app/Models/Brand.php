@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Product\Product;
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
@@ -41,10 +42,34 @@ class Brand extends Model
     }
 
     /**
+     * Get the owner that owns the brand.
+     */
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner');
+    }
+
+    /**
+     * Get the manager of the brand.
+     */
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'manager');
+    }
+
+    /**
      * Get the products for the shop.
      */
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Get the specifications for the attribute.
+     */
+    public function specifications()
+    {
+        return $this->hasMany(Specification::class);
     }
 }
