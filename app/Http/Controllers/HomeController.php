@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Helpers\ProductSimple;
+use App\Helpers\ProductHelper;
 use App\Helpers\ProductVariant;
 use App\Models\Product\Variation;
 use App\Models\Brand;
@@ -27,9 +27,6 @@ class HomeController extends MainController
      */
     public function index()
     {
-        $brands = Brand::select(['name','slug'])->get();
-        foreach ($brands as $brand) {
-            echo "<a href='brand/$brand->slug'>$brand->name</a><br>";
-        }
+        echo "<a href='/products'>Products</a><br>";
     }
 }
