@@ -2,11 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AbstractClass\ProductAbstract;
 use Illuminate\Http\Request;
-use App\Models\Product\Product;
+
 
 class ProductController extends MainController
 {
+    /**
+     * The products repository instance.
+     */
+    protected $products;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  ProductAbstract  $products
+     * @return void
+     */
+    public function __construct(ProductAbstract $products)
+    {
+        $this->products = $products;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +32,10 @@ class ProductController extends MainController
      */
     public function index()
     {
-        $products = Product::all();
-        dump($products);
+        $products = $this->products->getAll();
+        foreach ($products as $products){
+            echo "<a href='/products/$products->slug'>$products->name</a><br>";
+        }
     }
 
     /**
@@ -42,12 +62,12 @@ class ProductController extends MainController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($slug)
     {
-
+        return $this->products->getName($slug);
     }
 
     /**
