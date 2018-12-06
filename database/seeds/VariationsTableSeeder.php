@@ -73,24 +73,28 @@ class VariationsTableSeeder extends Seeder
                 'sku' => 'shirt_small',
                 'price' => 2100.00,
                 'quantity' => 5,
+                'image' => null,
             ],
             [
                 'product_id' => 4,
                 'sku' => 'shirt_medium',
                 'price' => 1999.00,
                 'quantity' => 9,
+                'image' => null,
             ],
             [
                 'product_id' => 4,
                 'sku' => 'shirt_large',
                 'price' => 2999.00,
                 'quantity' => 19,
+                'image' => null,
             ],
             [
                 'product_id' => 5,
                 'sku' => 'zymnye_nosky_muzhskye_brawni',
                 'price' => 130.00,
                 'quantity' => 119,
+                'image' => null,
             ],
             [
                 'product_id' => 6,

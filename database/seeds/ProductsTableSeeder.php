@@ -17,18 +17,21 @@ class ProductsTableSeeder extends Seeder
                 'slug' => 'originals_pharrell_williams',
                 'brand_id' => 1,
                 'user_id' => 3,
+                'gallery' => null,
             ],
             [
                 'name' => 'Yeezy Boost 750 OG',
                 'slug' => 'yeezy_boost_750_og',
                 'brand_id' => 1,
                 'user_id' => 3,
+                'gallery' => null,
             ],
             [
                 'name' => 'T-shirt',
                 'slug' => 't_shirt',
                 'brand_id' => 2,
                 'user_id' => 4,
+                'gallery' => null,
             ],
             [
                 'name' => 'Shirt',
@@ -50,6 +53,7 @@ class ProductsTableSeeder extends Seeder
                 'slug' => 'konserva_nosok_girl_boss',
                 'brand_id' => 3,
                 'user_id' => 6,
+                'gallery' => null,
             ]
         ]);
     }
