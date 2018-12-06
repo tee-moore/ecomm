@@ -35,12 +35,15 @@ class ProductsTableSeeder extends Seeder
                 'slug' => 'shirt',
                 'brand_id' => 2,
                 'user_id' => 4,
+                'gallery' => 'collins/shirt.jpg',
+
             ],
             [
                 'name' => 'Зимние носки мужские Brawni',
                 'slug' => 'zymnye_nosky_muzhskye_brawni',
                 'brand_id' => 3,
                 'user_id' => 6,
+                'gallery' => 'zhytomyrskye_nosky/zymnye_nosky_muzhskye_brawn1.jpg',
             ],
             [
                 'name' => 'Консерва-носок "Girl boss"',
