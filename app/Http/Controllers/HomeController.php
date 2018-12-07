@@ -13,7 +13,8 @@ class HomeController extends MainController
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        parent::__construct();
+
     }
 
     /**

@@ -8,14 +8,24 @@ use App\Models\Product\Taxonomy;
 class TagController extends MainController
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $taxonomy = Taxonomy::all();
-        dump($taxonomy);
+
     }
 
     /**

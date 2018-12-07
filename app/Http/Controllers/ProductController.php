@@ -21,6 +21,8 @@ class ProductController extends MainController
      */
     public function __construct(ProductAbstract $products)
     {
+        parent::__construct();
+
         $this->products = $products;
 //        $this->products = app()->make(ProductAbstract::class);
     }

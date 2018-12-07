@@ -20,6 +20,8 @@ class AdminProductController extends AdminMainController
      */
     public function __construct(ProductAbstract $products)
     {
+        parent::__construct();
+
         $this->products = $products;
     }
 
