@@ -15,20 +15,11 @@ abstract class ProductAbstract
 {
     public function getAll()
     {
-//        return Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->get();
-        return Brand::with(['products.variations.specifications.attribute', 'products.variations.specifications.value'])->get();
+        return Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->get();
     }
 
-    public function getList()
+    public function getOne($slug)
     {
-        return Product::all();
+        return Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('slug', $slug)->firstOrFail();
     }
-
-    public function getName($slug)
-    {
-        $product = Product::where('slug', $slug)->firstOrFail();
-        return $product->name;
-    }
-
-    abstract public function getType();
 }
