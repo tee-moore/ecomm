@@ -13,7 +13,7 @@ class HomeController extends MainController
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -23,6 +23,6 @@ class HomeController extends MainController
      */
     public function index()
     {
-        echo "<a href='/products'>Products</a><br>";
+        return view('index');
     }
 }
