@@ -12,8 +12,5 @@ use App\Helpers\AbstractClass\ProductAbstract;
 
 class ProductHelper extends ProductAbstract
 {
-    public function getType()
-    {
-        echo "Simple";
-    }
+
 }

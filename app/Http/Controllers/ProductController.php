@@ -22,6 +22,7 @@ class ProductController extends MainController
     public function __construct(ProductAbstract $products)
     {
         $this->products = $products;
+//        $this->products = app()->make(ProductAbstract::class);
     }
 
 
@@ -33,9 +34,7 @@ class ProductController extends MainController
     public function index()
     {
         $products = $this->products->getAll();
-        foreach ($products as $products){
-            echo "<a href='/products/$products->slug'>$products->name</a><br>";
-        }
+        return view('products')->with('products', $products);
     }
 
     /**
@@ -67,7 +66,8 @@ class ProductController extends MainController
      */
     public function show($slug)
     {
-        return $this->products->getName($slug);
+        $product = $this->products->getOne($slug);
+        return view('product')->with('product', $product);
     }
 
     /**
