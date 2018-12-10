@@ -2,11 +2,11 @@
 
 return [
 
-    'imagefolder' => [
-        'root' => 'images',
-        'default' => 'images/default/',
-        'products' => 'images/products/',
-        'users' => 'images/users/',
+    'folder' => [
+        'products' => '/images/products/',
+        'users' => '/images/users/',
     ],
+    'defaultProductImage' => 'default/product.png',
+    'defaultUserImage' => 'default/user.png',
 
 ];
