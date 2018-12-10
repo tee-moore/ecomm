@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Product\Variation;
 
 class VariationsTableSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class VariationsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('variations')->insert([
+        $variations = [
             [
                 'product_id' => 1,
                 'sku' => 'originals_pharrell_williams_blue',
@@ -103,6 +104,10 @@ class VariationsTableSeeder extends Seeder
                 'quantity' => 150,
                 'image' => 'zhytomyrskye_nosky/konserva_nosok_girl_boss.jpg',
             ]
-        ]);
+        ];
+
+        foreach($variations as $variation) {
+            Variation::create($variation);
+        }
     }
 }

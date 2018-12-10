@@ -25,9 +25,9 @@ class CreateProductsTable extends Migration
                     $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
                     $table->text('description')->nullable();
                     $table->text('gallery')->nullable();
+                    $table->integer('product_type')->unsigned()->default(0);
                     $table->boolean('disabled')->default(0);
                     $table->boolean('deleted')->default(0);
-                    $table->integer('product_type')->unsigned()->default(0);
                     $table->timestamps();
                     $table->engine = 'InnoDB';
                     $table->charset = 'utf8';

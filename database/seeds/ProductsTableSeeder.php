@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Product\Product;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -11,13 +12,14 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('products')->insert([
+        $products = [
             [
                 'name' => 'Originals Pharrell Williams',
                 'slug' => 'originals_pharrell_williams',
                 'brand_id' => 1,
                 'user_id' => 3,
                 'gallery' => null,
+                'product_type' => 1,
             ],
             [
                 'name' => 'Yeezy Boost 750 OG',
@@ -25,6 +27,7 @@ class ProductsTableSeeder extends Seeder
                 'brand_id' => 1,
                 'user_id' => 3,
                 'gallery' => null,
+                'product_type' => 1,
             ],
             [
                 'name' => 'T-shirt',
@@ -32,6 +35,7 @@ class ProductsTableSeeder extends Seeder
                 'brand_id' => 2,
                 'user_id' => 4,
                 'gallery' => null,
+                'product_type' => 1,
             ],
             [
                 'name' => 'Shirt',
@@ -39,6 +43,7 @@ class ProductsTableSeeder extends Seeder
                 'brand_id' => 2,
                 'user_id' => 4,
                 'gallery' => 'collins/shirt.jpg',
+                'product_type' => 1,
 
             ],
             [
@@ -47,6 +52,7 @@ class ProductsTableSeeder extends Seeder
                 'brand_id' => 3,
                 'user_id' => 6,
                 'gallery' => 'zhytomyrskye_nosky/zymnye_nosky_muzhskye_brawn1.jpg',
+                'product_type' => 0,
             ],
             [
                 'name' => 'Консерва-носок "Girl boss"',
@@ -54,7 +60,12 @@ class ProductsTableSeeder extends Seeder
                 'brand_id' => 3,
                 'user_id' => 6,
                 'gallery' => null,
-            ]
-        ]);
+                'product_type' => 0,
+            ],
+        ];
+
+        foreach($products as $product) {
+            Product::create($product);
+        }
     }
 }
