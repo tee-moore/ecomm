@@ -23,6 +23,13 @@ class Taxonomy extends Model
     ];
 
     /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
      * The variations that belong to the taxonomy.
      */
     public function variations()

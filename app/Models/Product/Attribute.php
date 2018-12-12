@@ -23,6 +23,13 @@ class Attribute extends Model
     ];
 
     /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
      * Get the specifications for the attribute.
      */
     public function specifications()

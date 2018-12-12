@@ -42,19 +42,11 @@ class Brand extends Model
     }
 
     /**
-     * Get the owner that owns the brand.
-     */
-    public function owner()
-    {
-        return $this->belongsTo(User::class, 'owner');
-    }
-
-    /**
      * Get the manager of the brand.
      */
-    public function manager()
+    public function users()
     {
-        return $this->belongsTo(User::class, 'manager');
+        return $this->hasMany(User::class);
     }
 
     /**

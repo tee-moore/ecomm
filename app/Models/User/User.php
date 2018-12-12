@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id'
+        'name', 'email', 'password', 'role_id', 'user_id'
     ];
 
     /**
@@ -38,19 +38,12 @@ class User extends Authenticatable
         'role_id' => 4,
     ];
 
-    /**
-     * Get the brand record associated with the user as ownre.
-     */
-    public function BrandOwner()
-    {
-        return $this->hasOne(Brand::class, 'owner');
-    }
 
     /**
      * Get the brand record associated with the user as manager.
      */
-    public function BrandManeger()
+    public function brand()
     {
-        return $this->hasOne(Brand::class, 'manager');
+        return $this->belongsTo(Brand::class);
     }
 }

@@ -16,6 +16,13 @@ class Variation extends Model
     ];
 
     /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
      * Get the product that owns the variation.
      */
     public function product()
