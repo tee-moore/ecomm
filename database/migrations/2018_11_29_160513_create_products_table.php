@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
                     $table->increments('id');
                     $table->string('name', 255)->index();
                     $table->string('slug', 255)->unique();
-                    $table->string('sku', 255)->default('');
+                    $table->string('main_sku', 255)->nullable();
                     $table->integer('brand_id')->unsigned();
                     $table->foreign('brand_id')->references('id')->on('brands')->onDelete('restrict')->onUpdate('cascade');
                     $table->integer('user_id')->unsigned();

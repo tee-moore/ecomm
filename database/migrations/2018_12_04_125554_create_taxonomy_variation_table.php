@@ -13,7 +13,8 @@ class CreateTaxonomyVariationTable extends Migration
      */
     public function up()
     {
-        Schema::create('variation_taxonomy', function (Blueprint $table) {
+        Schema::create('taxonomy_variation', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('variation_id')->unsigned();
             $table->foreign('variation_id')->references('id')->on('variations')->onDelete('restrict')->onUpdate('cascade');
             $table->integer('taxonomy_id')->unsigned();
@@ -28,6 +29,6 @@ class CreateTaxonomyVariationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variation_taxonomy');
+        Schema::dropIfExists('taxonomy_variation');
     }
 }

@@ -15,6 +15,7 @@ class CreateSpecificationsTable extends Migration
     {
         if (!Schema::hasTable('specifications')) {
             Schema::create('specifications', function (Blueprint $table) {
+                $table->increments('id');
                 $table->integer('variation_id')->unsigned();
                 $table->foreign('variation_id')->references('id')->on('variations');
                 $table->integer('attribute_id')->unsigned();
