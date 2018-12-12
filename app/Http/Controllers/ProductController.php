@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\AbstractClass\ProductAbstract;
 use Illuminate\Http\Request;
+use App\Helpers\AbstractClass\ProductAbstract;
 
 
 class ProductController extends MainController
@@ -63,7 +63,7 @@ class ProductController extends MainController
     /**
      * Display the specified resource.
      *
-     * @param  int  $slug
+     * @param str $slug
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
