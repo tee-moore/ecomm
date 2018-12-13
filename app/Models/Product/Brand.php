@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Product;
 
-use App\Models\Product\Product;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -55,13 +54,5 @@ class Brand extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
-    }
-
-    /**
-     * Get the specifications for the attribute.
-     */
-    public function specifications()
-    {
-        return $this->hasMany(Specification::class);
     }
 }

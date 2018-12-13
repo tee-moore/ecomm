@@ -8,7 +8,7 @@
                     <div class="card-header">
                         Products
                         {!! Form::open(['route' => 'admin.product.create', 'method' => 'get']) !!}
-                            {!! Form::submit('Add new!'); !!}
+                            {!! Form::submit('Add New', ['class' => 'btn btn-primary', 'type' => 'submit']); !!}
                         {!! Form::close() !!}
                     </div>
 
@@ -37,7 +37,7 @@
                                 @foreach ($products as $product)
                                     <tr style="border-bottom: 1px solid #eee;">
                                         <td><input type="checkbox"></td>
-                                        <td><img src="{{ $product->gallery }}" width="50" height="50"></td>
+                                        <td><img src="{{ asset($product->gallery) }}" width="50" height="50"></td>
                                         <td>{!! link_to_route('admin.product.edit', $product->name, ['id' => $product->id]) !!}</td>
                                         <td>{{ $product->product_type }}</td>
                                         <td>{{ $product->sku }}</td>

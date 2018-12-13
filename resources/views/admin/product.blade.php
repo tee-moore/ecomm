@@ -18,9 +18,9 @@
                         @endif
 
                         @if (!empty($product))
-                            {!! Form::open(['route' => ['admin.product.update', !empty($product) ? $product->id : '']]) !!}
+                            {!! Form::open(['route' => ['admin.product.update', !empty($product) ? $product->id : ''], 'files' => true]) !!}
                         @else
-                            {!! Form::open(['route' => ['admin.product.store']]) !!}
+                            {!! Form::open(['route' => ['admin.product.store'], 'files' => true]) !!}
                         @endif
                                                     {!! Form::label('product[name]', 'Product name') !!}
                             {!! Form::text('product[name]', !empty($product) ? $product->name : '') !!}
@@ -47,55 +47,71 @@
                             {!! Form::label("", 'Variations') !!}
                             <br>
                             @if (!empty($product))
+                                @php
+                                    $i = 0;
+                                @endphp
+
                                 @foreach ($product->variations as $variation)
                                     <div class="tab">
-                                        {!! Form::hidden("variation[$variation->id][id]", $variation->id) !!}
-                                        {!! Form::label("variation[$variation->id][sku]", 'variation sku') !!}
-                                        {!! Form::text("variation[$variation->id][sku]", $variation->sku) !!}
-                                        {!! Form::label("variation[$variation->id][image]", 'variation image') !!}
-                                        {!! Form::text("variation[$variation->id][image]", $variation->image) !!}
-                                        {!! Form::label("variation[$variation->id][price]", 'variation price') !!}
-                                        {!! Form::text("variation[$variation->id][price]", $variation->price) !!}
-                                        {!! Form::label("variation[$variation->id][discount_price]", 'variation discount price') !!}
-                                        {!! Form::text("variation[$variation->id][discount_price]", $variation->discount_price) !!}
-                                        {!! Form::label("variation[$variation->id][quantity]", 'variation quantity') !!}
-                                        {!! Form::text("variation[$variation->id][quantity]", $variation->quantity) !!}
-                                        {!! Form::label("variation[$variation->id][disabled]", 'variation disabled') !!}
-                                        {!! Form::checkbox("variation[$variation->id][disabled]", $variation->disabled) !!}
+                                        {!! Form::hidden("variation[$i][id]", $variation->id) !!}
+                                        {!! Form::label("variation[$i][sku]", 'variation sku') !!}
+                                        {!! Form::text("variation[$i][sku]", $variation->sku) !!}
+                                        <br>
+                                        {!! Form::label("variation[$i][image]", 'variation image') !!}
+                                        @if (!empty($variation->image))
+                                            <img src="{{ asset($variation->image) }}" width="50" height="50">
+                                            {!! Form::file("variation[$i][image]") !!}
+                                        @else
+                                            {!! Form::file("variation[$i][image]") !!}
+                                        @endif
+                                        <br>
+                                        {!! Form::label("variation[$i][price]", 'variation price') !!}
+                                        {!! Form::text("variation[$i][price]", $variation->price) !!}
+                                        {!! Form::label("variation[$i][discount_price]", 'variation discount price') !!}
+                                        {!! Form::text("variation[$i][discount_price]", $variation->discount_price) !!}
+                                        {!! Form::label("variation[$i][quantity]", 'variation quantity') !!}
+                                        {!! Form::text("variation[$i][quantity]", $variation->quantity) !!}
+                                        {!! Form::label("variation[$i][disabled]", 'variation disabled') !!}
+                                        {!! Form::checkbox("variation[$i][disabled]", $variation->disabled) !!}
 
                                         <br>
                                         {!! Form::label("", 'Specification') !!}
                                         <br>
                                         @foreach ($variation->specifications as $specification)
                                             {!! Form::label('', $specification->attribute->name) !!}
-                                            {!! Form::select("variation[$variation->id][specifications][".$specification->attribute->id."]", $specifications[$specification->attribute->name], $specification->value_id) !!}
+                                            {!! Form::select("variation[$i][specifications][".$specification->attribute->id."]", $specifications[$specification->attribute->name], $specification->value_id) !!}
                                         @endforeach
 
                                     </div>
                                     <br><br>
+                                    @php
+                                        $i++;
+                                    @endphp
                                 @endforeach
                             @else
                                 <div class="tab">
-                                    {!! Form::hidden("variation[0][id]", '') !!}
-                                    {!! Form::label("variation[0][sku]", 'variation sku') !!}
-                                    {!! Form::text("variation[0][sku]", '') !!}
-                                    {!! Form::label("variation[0][image]", 'variation image') !!}
-                                    {!! Form::text("variation[0][image]", '') !!}
-                                    {!! Form::label("variation[0][price]", 'variation price') !!}
-                                    {!! Form::text("variation[0][price]", '') !!}
-                                    {!! Form::label("variation[0][discount_price]", 'variation discount price') !!}
-                                    {!! Form::text("variation[0][discount_price]", '') !!}
-                                    {!! Form::label("variation[0][quantity]", 'variation quantity') !!}
-                                    {!! Form::text("variation[0][quantity]", '') !!}
-                                    {!! Form::label("variation[0][disabled]", 'variation disabled') !!}
-                                    {!! Form::checkbox("variation[0][disabled]", '') !!}
+                                    {!! Form::hidden("variation[$i][id]", '') !!}
+                                    {!! Form::label("variation[$i][sku]", 'variation sku') !!}
+                                    {!! Form::text("variation[$i][sku]", '') !!}
+                                    <br>
+                                    {!! Form::label("variation[$i][image]", 'variation image') !!}
+                                    {!! Form::file("variation[$i][image]") !!}
+                                    <br>
+                                    {!! Form::label("variation[$i][price]", 'variation price') !!}
+                                    {!! Form::text("variation[$i][price]", '') !!}
+                                    {!! Form::label("variation[$i][discount_price]", 'variation discount price') !!}
+                                    {!! Form::text("variation[$i][discount_price]", '') !!}
+                                    {!! Form::label("variation[$i][quantity]", 'variation quantity') !!}
+                                    {!! Form::text("variation[$i][quantity]", '') !!}
+                                    {!! Form::label("variation[$i][disabled]", 'variation disabled') !!}
+                                    {!! Form::checkbox("variation[$i][disabled]", '') !!}
                                     <br>
                                     {!! Form::label("", 'Specification') !!}
                                     <br>
                                     @foreach ($specifications as $key =>$attribute)
                                         @foreach ($attribute as $name => $values)
                                         {!! Form::label('', $name) !!}
-                                        {!! Form::select("variation[0][specifications][".$key."]", $values) !!}
+                                        {!! Form::select("variation[$i][specifications][".$key."]", $values) !!}
                                         @endforeach
                                     @endforeach
                             @endif

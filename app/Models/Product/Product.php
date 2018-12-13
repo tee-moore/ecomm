@@ -2,7 +2,6 @@
 
 namespace App\Models\Product;
 
-use App\Models\Brand;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 

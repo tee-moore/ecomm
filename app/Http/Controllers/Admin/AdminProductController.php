@@ -8,6 +8,7 @@ use App\Helpers\AbstractClass\ProductAbstract;
 use App\Models\Product\Product;
 use App\Models\Product\Specification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AdminProductController extends AdminMainController
 {
@@ -50,7 +51,13 @@ class AdminProductController extends AdminMainController
     {
         $user = Auth::user();
         $user_id = $user->id;
-        $brand_id = $user->brand->id;
+
+        //TEMP need add permission for roles
+        if($user_id == 1) {
+            return "You do not have permission to edit this brand";
+        } else {
+            $brand_id = $user->brand->id;
+        }
 
         $specifications = $this->products->getSpecifications();
 
@@ -129,11 +136,15 @@ class AdminProductController extends AdminMainController
     public function update(Request $request, $id)
     {
         $i = 0;
+        $user = Auth::user();
+        $brand = $user->brand->slug;
         $input = $request->all();
+        $files = $request->file();
         $product = $this->products->getOneById($id);
         $product->update($input['product']);
 
         foreach ($input['variation'] as $variation) {
+            $name = $variation['sku'];
             foreach ($variation as $key => $value) {
                 if($key == 'specifications'){
                     $j = 0;
@@ -142,6 +153,12 @@ class AdminProductController extends AdminMainController
                         $product->variations[$i]->specifications[$j]->value_id = $value;
                         $j++;
                     }
+                } elseif($key == 'image'){
+                    $file = $files['variation'][$i]['image'];
+                    $ext = $file->getClientOriginalExtension();
+                    $path = $file->storeAs('products/'.$brand, $name.'.'.$ext);
+                    $path = str_replace('products/','', $path);
+                    $product->variations[$i]->image = $path;
                 } else {
                     $product->variations[$i]->$key = $value;
                 }

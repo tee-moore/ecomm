@@ -14,7 +14,8 @@ abstract class ProductAbstract
      */
     public function getOneById($id)
     {
-        return Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('id', $id)->firstOrFail();
+        $product = Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('id', $id)->firstOrFail();
+        return $this->prepareProduct($product);
     }
 
     /**
@@ -23,7 +24,8 @@ abstract class ProductAbstract
      */
     public function getOneBySlug($slug)
     {
-        return Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('slug', $slug)->firstOrFail();
+        $product = Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('slug', $slug)->firstOrFail();
+        return $this->prepareProduct($product);
     }
 
     /**
@@ -80,6 +82,23 @@ abstract class ProductAbstract
         }
 
         return $products;
+    }
+
+    /**
+     * @param $product
+     * @return mixed
+     */
+    public function prepareProduct($product){
+
+        foreach ($product->variations as $variation){
+            if (empty($variation->image)) {
+                $variation->image = $this->getDefaultProductImage();
+            }    else {
+                $variation->image = $this->getProductsImageFolderPath() . $variation->image;
+            }
+        }
+
+        return $product;
     }
 
     public function getSpecifications($product = null){
