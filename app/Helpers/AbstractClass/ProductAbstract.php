@@ -15,7 +15,8 @@ abstract class ProductAbstract
     public function getOneById($id)
     {
         $product = Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('id', $id)->firstOrFail();
-        return $this->prepareProduct($product);
+//        return $this->prepareProduct($product);
+        return $product;
     }
 
     /**

@@ -39,7 +39,10 @@ class AdminProductController extends AdminMainController
     {
         $products = $this->products->getAll();
         $preparedListProducts = $this->products->prepareProductList($products);
-        return view('admin.products')->with('products', $preparedListProducts);
+        if (view()->exists('admin.products'))
+        {
+            return view('admin.products')->with('products', $preparedListProducts);
+        }
     }
 
     /**
@@ -139,6 +142,7 @@ class AdminProductController extends AdminMainController
         $user = Auth::user();
         $brand = $user->brand->slug;
         $input = $request->all();
+//        dd($input);
         $files = $request->file();
         $product = $this->products->getOneById($id);
         $product->update($input['product']);
