@@ -60,7 +60,7 @@
                                     @foreach ($products as $product)
                                         <tr style="border-bottom: 1px solid #eee;">
                                             <td><input type="checkbox" class="filled-in" id="product-{{ $product->id }}" name="product"><label for="product-{{ $product->id }}"></label></td>
-                                            <td><img src="{{ asset($product->gallery) }}" width="50" height="50"></td>
+                                            <td><img src="{{ asset('storage/images/products/'. $product->gallery) }}" width="50" height="50"></td>
                                             <td>{!! link_to_route('admin.product.edit', $product->name, ['id' => $product->id]) !!}</td>
                                             <td>{{ $product->product_type }}</td>
                                             <td>{{ $product->sku }}</td>

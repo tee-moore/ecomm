@@ -24,6 +24,8 @@ class HomeController extends MainController
      */
     public function index()
     {
-        return view('index');
+        if (view()->exists('front.index')){
+            return view('front.index');
+        }
     }
 }
