@@ -2,106 +2,90 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Product\Variation;
+use App\Helpers\Contracts\SpecificationInterface;
 use Illuminate\Http\Request;
-use App\Helpers\AbstractClass\ProductAbstract;
+use App\Helpers\Contracts\ProductInterface;
 use App\Models\Product\Product;
-use App\Models\Product\Specification;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class AdminProductController extends AdminMainController
 {
     /**
-     * The products repository instance.
+     * The productHelper instance.
      */
-    protected $products;
+    protected $product;
 
     /**
-     * Create a new controller instance.
-     *
-     * @param  ProductAbstract  $products
-     * @return void
+     * The specificationHelper instance.
      */
-    public function __construct(ProductAbstract $products)
+    protected $specification;
+
+    /**
+     * AdminProductController constructor.
+     * @param ProductInterface $instance
+     */
+    public function __construct(ProductInterface $product, SpecificationInterface $specification)
     {
         parent::__construct();
 
-        $this->products = $products;
+        $this->product = $product;
+        $this->specification = $specification;
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the products.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $products = $this->products->getAll();
-        $preparedListProducts = $this->products->prepareProductList($products);
+        $data = [
+            'products' => $this->product->getAll(),
+        ];
+
         if (view()->exists('admin.products'))
         {
-            return view('admin.products')->with('products', $preparedListProducts);
+            return view('admin.products')->with($data);
         }
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new product.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        $user = Auth::user();
-        $user_id = $user->id;
+        $data = [
+            'user_id'        => Auth::user()->id,
+            'brand_id'       => Auth::user()->brand->id,
+            'specifications' => $this->specification->getAll(),
+            'product_type'   => [ 0 => 'Simple', 1 => 'Variant' ],
+            'product_status' => [ 0 => 'In stock', 1 => 'Out of stock' ],
+        ];
 
-        //TEMP need add permission for roles
-        if($user_id == 1) {
-            return "You do not have permission to edit this brand";
-        } else {
-            $brand_id = $user->brand->id;
+        if (view()->exists('admin.add_product'))
+        {
+            return view('admin.add_product')->with($data);
         }
-
-        $specifications = $this->products->getSpecifications();
-
-        return view('admin.product')->with(['user_id' => $user_id, 'brand_id' => $brand_id, 'specifications' => $specifications]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     *  Store a newly created product in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-
         $product = new Product();
-        $product->name         = $request['product']['name'];
-        $product->main_sku     = $request['product']['main_sku'];
-        $product->product_type = $request['product']['product_type'];
-        $product->description  = $request['product']['description'];
-        $product->gallery      = $request['product']['gallery'];
-        $product->brand_id     = $request['product']['brand_id'];
-        $product->user_id      = $request['product']['user_id'];
-        $product->save();
-
-        foreach ($input['variation'] as $variationData){
-            $specificationsData = array_pop($variationData);
-            $variation = new Variation($variationData);
-            $product->variations()->save($variation);
-            foreach ($specificationsData as $key => $value){
-                $specifications = new Specification(['attribute_id' => $key, 'value_id' => $value]);
-                $variation->specifications()->save($specifications);
-            }
-        }
+        $this->product->create($request, $product);
 
         return redirect()->route('admin.product.edit', $product->id);
-    }
+     }
 
     /**
-     * Display the specified resource.
+     * Display the specified product.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -112,81 +96,48 @@ class AdminProductController extends AdminMainController
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified product.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        $product = $this->products->getOneById($id);
-        if($this->products->hasVariations($product)){
-            $specifications = $this->products->getSpecifications($product);
-        } else {
-            $specifications = '';
-        }
+        $product = $this->product->getOneById($id);
 
-        return view('admin.product')->with(['product' => $product, 'specifications' => $specifications]);
+        $data = [
+            'product' => $product,
+            'specifications' => $this->specification->getByProduct($product),
+        ];
+
+        if (view()->exists('admin.edit_product'))
+        {
+            return view('admin.edit_product')->with($data);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        $i = 0;
-        $user = Auth::user();
-        $brand = $user->brand->slug;
-        $input = $request->all();
-//        dd($input);
-        $files = $request->file();
-        $product = $this->products->getOneById($id);
-        $product->update($input['product']);
-
-        foreach ($input['variation'] as $variation) {
-            $name = $variation['sku'];
-            foreach ($variation as $key => $value) {
-                if($key == 'specifications'){
-                    $j = 0;
-                    foreach ($value as $key => $value){
-                        $product->variations[$i]->specifications[$j]->attribute_id = $key;
-                        $product->variations[$i]->specifications[$j]->value_id = $value;
-                        $j++;
-                    }
-                } elseif($key == 'image'){
-                    $file = $files['variation'][$i]['image'];
-                    $ext = $file->getClientOriginalExtension();
-                    $path = $file->storeAs('products/'.$brand, $name.'.'.$ext);
-                    $path = str_replace('products/','', $path);
-                    $product->variations[$i]->image = $path;
-                } else {
-                    $product->variations[$i]->$key = $value;
-                }
-            }
-            $i++;
-            $product->push();
-        }
-
+        $this->product->update($request, $id);
         return redirect()->back();
     }
-
-
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        $product = $this->products->getOneById($id);
-        $product->deleted = 1;
-        $product->save();
+        $this->product->delete($id);
         return redirect()->back();
     }
 }

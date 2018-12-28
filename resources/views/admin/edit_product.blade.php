@@ -30,29 +30,52 @@
                             </div>
 
                             @if (!empty($product))
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        {!! Form::label('product[slug]', 'Product slug', ['class' => 'form-label']) !!}
-                                        {!! Form::text('product[slug]', $product->slug, ['class' => 'form-control', 'id' => 'product_slug']) !!}
+                                <div class="form-horizontal">
+                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <div class="form-group">
+                                            {!! Form::label('product[slug]', 'Product slug', ['class' => 'form-label']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                {!! Form::text('product[slug]', $product->slug, ['class' => 'form-control', 'id' => 'product_slug']) !!}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             @endif
 
-                            <div class="form-group form-float">
-                                <div class="form-line">
-                                    {!! Form::text('product[main_sku]', !empty($product) ? $product->main_sku : '', ['class' => 'form-control', 'id' => 'product_sku']) !!}
-                                    {!! Form::label('product[main_sku]', 'Product sku', ['class' => 'form-label']) !!}
+                            <div class="form-horizontal">
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <div class="form-group">
+                                    {!! Form::label('product[main_sku]', 'Product SKU', ['class' => 'form-label']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            {!! Form::text('product[main_sku]', !empty($product) ? $product->main_sku : '', ['class' => 'form-control', 'id' => 'product_sku']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-horizontal">
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                    <div class="form-group">
+                                    {!! Form::label('product[product_type]', 'Product type', ['class' => 'form-label']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            {!! Form::select('product[product_type]', ['0' => 'Simple', '1' => 'Variant'], !empty($product) ? $product->product_type : '', ['class' => 'form-control show-tick']) !!}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group form-float">
-                                <div class="form-line">
-                                {!! Form::label('product[product_type]', 'Product type', ['class' => 'form-label']) !!}
-                                {!! Form::select('product[product_type]', ['0' => 'Simple', '1' => 'Variant'], !empty($product) ? $product->product_type : '', ['class' => 'form-control show-tick']) !!}
-                                </div>
-                            </div>
-
-                            <!-- Nav tabs -->
+                           <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active">
                                     <a href="#home_with_icon_title" data-toggle="tab" aria-expanded="false">
@@ -61,7 +84,7 @@
                                 </li>
                                 <li role="presentation" class="">
                                     <a href="#profile_with_icon_title" data-toggle="tab" aria-expanded="true">
-                                        <i class="material-icons">face</i> SHIPPING
+                                        <i class="material-icons">face</i> DIMENSION
                                     </a>
                                 </li>
                                 <li role="presentation" class="">
@@ -69,11 +92,13 @@
                                         <i class="material-icons">email</i> ATTRIBUTES
                                     </a>
                                 </li>
+                                @if (!empty($product))
                                 <li role="presentation" class="">
                                     <a href="#settings_with_icon_title" data-toggle="tab" aria-expanded="false">
                                         <i class="material-icons">settings</i> VARIATIONS
                                     </a>
                                 </li>
+                                @endif
                             </ul>
 
                             <!-- Tab panes -->
@@ -89,8 +114,13 @@
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="messages_with_icon_title">
                                     <p>
+                                        @foreach ($specifications as $key => $specification)
+                                            {!! Form::label('', key($specification)) !!}
+                                            {!! Form::select("attribute{$key}", array_shift($specification), ['class'=> ' ', 'placeholder' => 'Select']) !!}
+                                        @endforeach
                                     </p>
                                 </div>
+                                @if (!empty($product))
                                 <div role="tabpanel" class="tab-pane fade" id="settings_with_icon_title">
                                     <div class="panel-group full-body" id="accordion" role="tablist" aria-multiselectable="true">
                                         @if (!empty($product))
@@ -102,7 +132,7 @@
                                                                 <i class="material-icons">poll</i> Variation #{{ $loop->index }}
                                                                 @foreach ($variation->specifications as $specification)
                                                                     {!! Form::label('', $specification->attribute->name) !!}
-                                                                    {!! Form::select("variation[".$loop->parent->index."][specifications][".$specification->attribute->id."]", $specifications[$specification->attribute->name], $specification->value_id, ['class'=> ' ', 'placeholder' => 'Select']) !!}
+                                                                    {!! Form::select("variation[".$loop->parent->index."][specifications][".$specification->attribute->id."]", $specifications[$specification->attribute->id][$specification->attribute->name], $specification->value->id) !!}
                                                                 @endforeach
                                                             </a>
                                                             <div class="float-right">
@@ -239,6 +269,7 @@
                                         @endif
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -275,7 +306,7 @@
                                     {!! Form::label('created_at', 'Created: ' ) !!} <span>{{ $product->created_at }}</span>
                                 </div>
                             @endif
-
+                                Status: Published
                             @if (!empty($product))
                                 <div class="form-group form-float">
                                     {!! Form::label('updated_at', 'Updated: ' ) !!} <span>{{ $product->updated_at }}</span>

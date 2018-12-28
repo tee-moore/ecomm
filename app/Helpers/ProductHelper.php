@@ -1,22 +1,32 @@
 <?php
 
-namespace App\Helpers\AbstractClass;
+namespace App\Helpers;
 
+use App\Helpers\Contracts\ProductInterface;
 use App\Models\Product\Product;
 use App\Models\Product\Attribute;
 use App\Models\Product\AttributeValue;
+use App\Models\Product\Variation;
+use App\Models\Product\Specification;
+use Illuminate\Http\Request;
 
-abstract class ProductAbstract
+class ProductHelper implements ProductInterface
 {
     /**
-     * @param $slug
+     * @return Product[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getAll()
+    {
+        return Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('deleted', 0)->get();
+    }
+
+    /**
+     * @param $id
      * @return Product|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
      */
     public function getOneById($id)
     {
-        $product = Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('id', $id)->firstOrFail();
-//        return $this->prepareProduct($product);
-        return $product;
+        return Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('id', $id)->firstOrFail();
     }
 
     /**
@@ -25,16 +35,72 @@ abstract class ProductAbstract
      */
     public function getOneBySlug($slug)
     {
-        $product = Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('slug', $slug)->firstOrFail();
-        return $this->prepareProduct($product);
+        return Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('slug', $slug)->firstOrFail();
     }
 
-    /**
-     * @return Product[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection3
-     */
-    public function getAll()
-    {
-        return Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('deleted', 0)->get();
+
+    public function create(Request $request, Product $product){
+
+        $product->name         = $request['product']['name'];
+        $product->main_sku     = $request['product']['main_sku'];
+        $product->product_type = $request['product']['product_type'];
+        $product->description  = $request['product']['description'];
+        $product->gallery      = (isset($request['product']['gallery'])) ? $request['product']['gallery']: null;
+        $product->brand_id     = $request['product']['brand_id'];
+        $product->user_id      = $request['product']['user_id'];
+
+        $product->save();
+
+        $input = $request->all();
+        foreach ($input['variation'] as $variationData){
+            $specificationsData = array_pop($variationData);
+            $variation = new Variation($variationData);
+            $product->variations()->save($variation);
+            foreach ($specificationsData as $key => $value){
+                $specifications = new Specification(['attribute_id' => $key, 'value_id' => $value]);
+                $variation->specifications()->save($specifications);
+            }
+        }
+    }
+
+    public function update(Request $request, $id){
+        $i = 0;
+        $user = Auth::user();
+        $brand = $user->brand->slug;
+        $input = $request->all();
+        $files = $request->file();
+        $product = $this->getOneById($id);
+        $product->update($input['product']);
+
+        foreach ($input['variation'] as $variation) {
+            $name = $variation['sku'];
+            foreach ($variation as $key => $value) {
+                if($key == 'specifications'){
+                    $j = 0;
+                    foreach ($value as $key => $value){
+                        $product->variations[$i]->specifications[$j]->attribute_id = $key;
+                        $product->variations[$i]->specifications[$j]->value_id = $value;
+                        $j++;
+                    }
+                } elseif($key == 'image'){
+                    $file = $files['variation'][$i]['image'];
+                    $ext = $file->getClientOriginalExtension();
+                    $path = $file->storeAs('products/'.$brand, $name.'.'.$ext);
+                    $path = str_replace('products/','', $path);
+                    $product->variations[$i]->image = $path;
+                } else {
+                    $product->variations[$i]->$key = $value;
+                }
+            }
+            $i++;
+            $product->push();
+        }
+    }
+
+    public function delete($id){
+        $product = $this->getOneById($id);
+        $product->deleted = 1;
+        $product->save();
     }
 
     /**
@@ -46,7 +112,7 @@ abstract class ProductAbstract
     }
 
     /**
-     * @param $products
+     * @param $product
      * @return bool
      */
     public function hasVariations($product){
@@ -55,6 +121,7 @@ abstract class ProductAbstract
 
     /**
      * @param $products
+     *
      * @return mixed
      */
     public function prepareProductList($products)
@@ -102,36 +169,8 @@ abstract class ProductAbstract
         return $product;
     }
 
-    public function getSpecifications($product = null){
-
-        if($product == null){
-            $attributes = Attribute::all();
-            foreach ($attributes as $attribute){
-                $values = AttributeValue::where( 'attribute_id',$attribute->id)->get();
-                foreach ($values as $value){
-                    $specifications[$attribute->id][$attribute->name][$value->id] = $value->value;
-                }
-            }
-
-            return $specifications;
-        }
-
-        foreach ($product->variations as $variation){
-            foreach ($variation->specifications as $specification){
-                $attribute_id[] = $specification->attribute_id;
-            }
-        }
-
-        $attribute_id = array_unique($attribute_id);
-
-        foreach ($attribute_id as $id){
-            $attribute_name = Attribute::where('id', $id)->firstOrFail();
-            $attribute_values = AttributeValue::where('attribute_id', $id)->get();
-            foreach ($attribute_values as $value){
-                $specifications[$attribute_name->name][$value->id] = $value->value;
-            }
-        }
-        return $specifications;
+    public function getAllSpecifications(){
+        return Specification::with(['attribute', 'value'])->get()->toArray();
     }
 
     public function getMinMaxVariatonQuantity($product){

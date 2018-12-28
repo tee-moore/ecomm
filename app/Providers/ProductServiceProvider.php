@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Helpers\AbstractClass\ProductAbstract;
-use App\Helpers\Product;
+use App\Helpers\Contracts\ProductInterface;
+use App\Helpers\ProductHelper;
 use Illuminate\Support\ServiceProvider;
 
 class ProductServiceProvider extends ServiceProvider
@@ -15,8 +15,8 @@ class ProductServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(ProductAbstract::class, function ($app) {
-            return new Product();
+        $this->app->bind(ProductInterface::class, function ($app) {
+            return new ProductHelper();
         });
     }
 }
