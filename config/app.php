@@ -179,6 +179,7 @@ return [
          * ecomm
          */
         \App\Providers\ProductServiceProvider::class,
+        \App\Providers\SpecificationServiceProvider::class,
     ],
 
     /*
