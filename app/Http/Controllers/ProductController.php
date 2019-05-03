@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Helpers\Contracts\ProductAbstract;
+use App\Helpers\Contracts\ProductInterface;
 
 
 class ProductController extends MainController
@@ -19,7 +19,7 @@ class ProductController extends MainController
      * @param  ProductAbstract  $products
      * @return void
      */
-    public function __construct(ProductAbstract $products)
+    public function __construct(ProductInterface $products)
     {
         parent::__construct();
 
@@ -36,7 +36,7 @@ class ProductController extends MainController
     public function index()
     {
         $products = $this->products->getAll();
-        return view('products')->with('products', $products);
+        return view('front.products')->with('products', $products);
     }
 
     /**
@@ -68,8 +68,8 @@ class ProductController extends MainController
      */
     public function show($slug)
     {
-        $product = $this->products->getOne($slug);
-        return view('product')->with('product', $product);
+        $product = $this->products->getOneBySlug($slug);
+        return view('front.product')->with('product', $product);
     }
 
     /**
