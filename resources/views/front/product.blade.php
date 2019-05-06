@@ -15,17 +15,7 @@
                         @endif
 
                         <div class="col-md-5">
-                            @php
-                                if($product->variations[0]->image != null){
-                                    $img = "products/".$product->variations[0]->image;
-                                } elseif($product->gallery != null) {
-                                    $img = "products/".$product->gallery;
-                                } else {
-                                    $img = "default/product.png";
-                                }
-
-                            @endphp
-                            <img src="/images/{{ $img }}"  width="300" height="300">
+                            <img src="{{ asset('storage/images/products/' . $product->variations[0]->image)}}" width="300" height="300">
                         </div>
 
                         <div class="col-md-7">

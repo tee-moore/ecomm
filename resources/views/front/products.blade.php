@@ -16,16 +16,11 @@
 
                         <ul>
                         @foreach ($products as $product)
-                            @php
-                                if($product->variations[0]->image != null){
-                                    $img = "products/".$product->variations[0]->image;
-                                } elseif($product->gallery != null) {
-                                    $img = "products/".$product->gallery;
-                                } else {
-                                    $img = "default/product.png";
-                                }
-                            @endphp
-                            <li><a href="product/{{ $product->slug }}"><img src="images/{{ $img  }}" width="50" height="50"></a> <a href="product/{{ $product->slug }}">{{ $product->name }}</a></li>
+                            <li><a href="product/{{ $product->slug }}">
+                                    <img src="{{ asset('storage/images/products/' . $product->variations[0]->image)}}" width="50" height="50">
+                                </a>
+                                <a href="product/{{ $product->slug }}">{{ $product->name }}</a>
+                            </li>
                         @endforeach
                         </ul>
 
