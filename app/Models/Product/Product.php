@@ -19,20 +19,6 @@ class Product extends Model
     ];
 
     /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
-    }
-
-    /**
      * Get the brand that owns the product.
      */
     public function brand()

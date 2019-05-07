@@ -9,6 +9,7 @@ use App\Models\Product\AttributeValue;
 use App\Models\Product\Variation;
 use App\Models\Product\Specification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductHelper implements ProductInterface
 {
@@ -42,6 +43,7 @@ class ProductHelper implements ProductInterface
     public function create(Request $request, Product $product){
 
         $product->name         = $request['product']['name'];
+        $product->slug         = Str::slug($request['product']['name']);
         $product->main_sku     = $request['product']['main_sku'];
         $product->product_type = $request['product']['product_type'];
         $product->description  = $request['product']['description'];
