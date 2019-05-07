@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 
 class VariationTaxonomyTableSeeder extends Seeder
 {
+    protected static $table = 'taxonomy_variation';
+
     /**
      * Run the database seeds.
      *
@@ -12,7 +14,7 @@ class VariationTaxonomyTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('taxonomy_variation')->insert([
+        DB::table(self::$table)->insert([
             ['taxonomy_id'  => 1,
              'variation_id' => 1,
             ],

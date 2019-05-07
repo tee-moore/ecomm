@@ -19,7 +19,7 @@ class ProductsTableSeeder extends Seeder
                 'slug'         => Str::slug('Originals Pharrell Williams'),
                 'sku'          => Str::slug('Originals Pharrell Williams'),
                 'brand_id'     => 1,
-                'gallery'      => null,
+                'gallery'      => '',
                 'product_type' => 1,
             ],
             [
@@ -27,7 +27,7 @@ class ProductsTableSeeder extends Seeder
                 'slug'         => Str::slug('Yeezy Boost 750 OG'),
                 'sku'          => Str::slug('Yeezy Boost 750 OG'),
                 'brand_id'     => 1,
-                'gallery'      => null,
+                'gallery'      => '',
                 'product_type' => 1,
             ],
             [
@@ -35,7 +35,7 @@ class ProductsTableSeeder extends Seeder
                 'slug'         => Str::slug('T-shirt'),
                 'sku'          => Str::slug('T-shirt'),
                 'brand_id'     => 2,
-                'gallery'      => null,
+                'gallery'      => '',
                 'product_type' => 1,
             ],
             [
@@ -43,7 +43,7 @@ class ProductsTableSeeder extends Seeder
                 'slug'         => Str::slug('Shirt'),
                 'sku'          => Str::slug('Shirt'),
                 'brand_id'     => 2,
-                'gallery'      => null,
+                'gallery'      => '',
                 'product_type' => 1,
 
             ],
@@ -52,7 +52,7 @@ class ProductsTableSeeder extends Seeder
                 'slug'         => Str::slug('Зимние носки мужские Brawni'),
                 'sku'          => Str::slug('Зимние носки мужские Brawni'),
                 'brand_id'     => 3,
-                'gallery'      => null,
+                'gallery'      => '',
                 'product_type' => 0,
             ],
             [
@@ -60,7 +60,7 @@ class ProductsTableSeeder extends Seeder
                 'slug'         => Str::slug('Консерва-носок "Girl boss"'),
                 'sku'          => Str::slug('Консерва-носок "Girl boss"'),
                 'brand_id'     => 3,
-                'gallery'      => null,
+                'gallery'      => '',
                 'product_type' => 0,
             ],
         ];

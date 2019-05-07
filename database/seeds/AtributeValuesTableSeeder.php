@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class AtributValuesTableSeeder extends Seeder
+class AtributeValuesTableSeeder extends Seeder
 {
     protected static $table = 'attribute_values';
 

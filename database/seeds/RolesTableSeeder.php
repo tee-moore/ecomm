@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 
 class RolesTableSeeder extends Seeder
 {
+    protected static $table = 'roles';
+
     /**
      * Run the database seeds.
      *
@@ -12,7 +14,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
+        DB::table(self::$table)->insert([
             ['name' => 'admin'],
             ['name' => 'owner'],
             ['name' => 'manager'],

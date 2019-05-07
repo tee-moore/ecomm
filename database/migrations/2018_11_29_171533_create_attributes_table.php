@@ -20,7 +20,7 @@ class CreateAttributesTable extends Migration
             {
                 $table->increments('id');
                 $table->string('name', 255)->index();
-                $table->text('description')->default('');
+                $table->text('description')->nullable();
                 $table->engine    = 'InnoDB';
                 $table->charset   = 'utf8';
                 $table->collation = 'utf8_unicode_ci';

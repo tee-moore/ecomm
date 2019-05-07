@@ -22,7 +22,7 @@ class CreateMediaTable extends Migration
                 $table->string('title', 255);
                 $table->string('alt', 255)->default('');
                 $table->string('url', 255);
-                $table->text('description')->default('');
+                $table->text('description')->nullable();
                 $table->tinyInteger('type')->unsigned();
                 $table->integer('parent_id')->unsigned();
                 $table->tinyInteger('parent_type')->unsigned();

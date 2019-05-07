@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 
 class TaxonomiesTableSeeder extends Seeder
 {
+    protected static $table = 'taxonomies';
+
     /**
      * Run the database seeds.
      *
@@ -12,7 +14,7 @@ class TaxonomiesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('taxonomies')->insert([
+        DB::table(self::$table)->insert([
             ['name'      => 'shoes',
              'type'      => 0,
              'parent_id' => 0,

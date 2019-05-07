@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 
 class SpecificationsTableSeeder extends Seeder
 {
+    protected static $table = 'specifications';
+
     /**
      * Run the database seeds.
      *
@@ -12,7 +14,7 @@ class SpecificationsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('specifications')->insert([
+        DB::table(self::$table)->insert([
             [
                 'attribute_id' => 1,
                 'variation_id' => 1,

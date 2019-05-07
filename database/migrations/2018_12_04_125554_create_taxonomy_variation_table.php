@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTaxonomyVariationTable extends Migration
 {
-    protected static $table = 'products';
+    protected static $table = 'taxonomy_variation';
 
     /**
      * Run the migrations.

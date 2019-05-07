@@ -6,6 +6,8 @@ use Illuminate\Support\Str;
 
 class BrandsTableSeeder extends Seeder
 {
+    protected static $table = 'brands';
+
     /**
      * Run the database seeds.
      *
@@ -13,7 +15,11 @@ class BrandsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('brands')->insert([
+        DB::table(self::$table)->insert([
+            [
+                'name' => 'Admin',
+                'slug' => Str::slug('Admin'),
+            ],
             [
                 'name' => 'Adidas',
                 'slug' => Str::slug('Adidas'),

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
+    protected static $table = 'users';
+
     /**
      * Run the database seeds.
      *
@@ -12,14 +14,14 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table(self::$table)->insert([
             [
                 'name' => 'admin',
                 'email' => 'admin@ecomm.loc',
                 'password' => '$2y$10$2r1LTvH1BnOMpj7Apj1uNOAFAXViGcplsM6qTTjYi5Al23fwW7rmm',
                 'remember_token' => 'UwpybRuF2jtzGqWQnxGd4tTsZBizXAk2TKRjhqZPgAPsqwDbCSqPndsea3fC',
                 'role_id' => 1,
-                'brand_id' => 0,
+                'brand_id' => 1,
             ],
             [
                 'name' => 'owner_adidas',
@@ -27,7 +29,7 @@ class UsersTableSeeder extends Seeder
                 'password' => '$2y$10$/s1NPUbYAbEvwiSfHnFIJO8vf3Hq1/xwDKFmiKYxhBzSd7R1RZx7m',
                 'remember_token' => '0tnpAVRVIfeil5bZBk4voLSAoX9UAirCE9ntKVNgnA2LXqDX4Z8W1T46KqRi',
                 'role_id' => 2,
-                'brand_id' => 1,
+                'brand_id' => 2,
             ],
             [
                 'name' => 'manager_adidas',
@@ -35,7 +37,7 @@ class UsersTableSeeder extends Seeder
                 'password' => '$2y$10$PdYL0ijdeK4moxUHu0gQCOjJoVS5iT5Ue.VF.rZkcwWUln28/W.2K',
                 'remember_token' => 'A5P8ziCRIfgvbW1hb0UHSJqvnmEegaO5fTAKYLxolvlbnIasKEQWOGW2Zmmc',
                 'role_id' => 3,
-                'brand_id' => 1,
+                'brand_id' => 2,
             ],
             [
                 'name' => 'owner_collins',
@@ -43,7 +45,7 @@ class UsersTableSeeder extends Seeder
                 'password' => '$2y$10$/s1NPUbYAbEvwiSfHnFIJO8vf3Hq1/xwDKFmiKYxhBzSd7R1RZx7m',
                 'remember_token' => '0tnpAVRVIfeil5bZBk4voLSAoX9UAirCE9ntKVNgnA2LXqDX4Z8W1T46KqRi',
                 'role_id' => 2,
-                'brand_id' => 2,
+                'brand_id' => 3,
             ],
             [
                 'name' => 'manager_collins',
@@ -51,7 +53,7 @@ class UsersTableSeeder extends Seeder
                 'password' => '$2y$10$PdYL0ijdeK4moxUHu0gQCOjJoVS5iT5Ue.VF.rZkcwWUln28/W.2K',
                 'remember_token' => 'A5P8ziCRIfgvbW1hb0UHSJqvnmEegaO5fTAKYLxolvlbnIasKEQWOGW2Zmmc',
                 'role_id' => 3,
-                'brand_id' => 2,
+                'brand_id' => 3,
             ],
             [
                 'name' => 'owner_zhytomyrskye_nosky',
@@ -59,7 +61,7 @@ class UsersTableSeeder extends Seeder
                 'password' => '$2y$10$/s1NPUbYAbEvwiSfHnFIJO8vf3Hq1/xwDKFmiKYxhBzSd7R1RZx7m',
                 'remember_token' => '0tnpAVRVIfeil5bZBk4voLSAoX9UAirCE9ntKVNgnA2LXqDX4Z8W1T46KqRi',
                 'role_id' => 2,
-                'brand_id' => 3,
+                'brand_id' => 4,
             ],
             [
                 'name' => 'manager_zhytomyrskye_nosky',
@@ -67,7 +69,7 @@ class UsersTableSeeder extends Seeder
                 'password' => '$2y$10$PdYL0ijdeK4moxUHu0gQCOjJoVS5iT5Ue.VF.rZkcwWUln28/W.2K',
                 'remember_token' => 'A5P8ziCRIfgvbW1hb0UHSJqvnmEegaO5fTAKYLxolvlbnIasKEQWOGW2Zmmc',
                 'role_id' => 3,
-                'brand_id' => 3,
+                'brand_id' => 4,
             ],
         ]);
     }

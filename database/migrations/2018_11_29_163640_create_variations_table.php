@@ -25,7 +25,7 @@ class CreateVariationsTable extends Migration
                 $table->decimal('price', 8, 2)->default(0);
                 $table->decimal('discount_price', 8, 2)->default(0);
                 $table->smallInteger('quantity')->unsigned()->default(0);
-                $table->text('description')->default('');
+                $table->text('description')->nullable();
                 $table->boolean('active')->default(1);
                 $table->tinyInteger('status')->unsigned()->default(0);
                 $table->softDeletes();
