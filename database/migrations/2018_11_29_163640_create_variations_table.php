@@ -22,7 +22,6 @@ class CreateVariationsTable extends Migration
                 $table->integer('product_id')->unsigned();
                 $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict')->onUpdate('cascade');
                 $table->string('sku', 255)->default('');
-                $table->string('image', 30)->default('');
                 $table->decimal('price', 8, 2)->default(0);
                 $table->decimal('discount_price', 8, 2)->default(0);
                 $table->smallInteger('quantity')->unsigned()->default(0);
