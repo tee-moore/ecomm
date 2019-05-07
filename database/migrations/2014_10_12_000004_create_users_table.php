@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
+    protected static $table = 'users';
+
     /**
      * Run the migrations.
      *
@@ -13,18 +15,18 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('users')) {
-            Schema::create('users', function (Blueprint $table) {
+        if (!Schema::hasTable(self::$table)) {
+            Schema::create(self::$table, function (Blueprint $table)
+            {
                 $table->increments('id');
                 $table->string('name', 255);
                 $table->string('email', 255)->unique();
                 $table->timestamp('email_verified_at')->nullable();
                 $table->string('password', 255);
-                $table->integer('role_id')->unsigned();
+                $table->integer('role_id')->unsigned()->default(0);
                 $table->foreign('role_id')->references('id')->on('roles')->onDelete('restrict')->onUpdate('cascade');
-                $table->integer('brand_id')->unsigned()->nullable();
+                $table->integer('brand_id')->unsigned()->default(0);
                 $table->foreign('brand_id')->references('id')->on('brands')->onDelete('restrict')->onUpdate('cascade');
-                $table->string('avatar', 255)->nullable();
                 $table->rememberToken();
                 $table->timestamps();
             });
@@ -38,6 +40,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists(self::$table);
     }
 }

@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateAttributesTable extends Migration
 {
+    protected static $table = 'attributes';
+
     /**
      * Run the migrations.
      *
@@ -13,12 +15,14 @@ class CreateAttributesTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('attributes')) {
-            Schema::create('attributes', function (Blueprint $table) {
+        if (!Schema::hasTable(self::$table)) {
+            Schema::create(self::$table, function (Blueprint $table)
+            {
                 $table->increments('id');
-                $table->string('name', 255);
-                $table->engine = 'InnoDB';
-                $table->charset = 'utf8';
+                $table->string('name', 255)->index();
+                $table->text('description')->default('');
+                $table->engine    = 'InnoDB';
+                $table->charset   = 'utf8';
                 $table->collation = 'utf8_unicode_ci';
             });
         }
@@ -31,6 +35,6 @@ class CreateAttributesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attributes');
+        Schema::dropIfExists(self::$table);
     }
 }

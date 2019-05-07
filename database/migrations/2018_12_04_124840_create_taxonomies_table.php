@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTaxonomiesTable extends Migration
 {
+    protected static $table = 'taxonomies';
+
     /**
      * Run the migrations.
      *
@@ -13,12 +15,15 @@ class CreateTaxonomiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('taxonomies', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 255)->index();
-            $table->string('type', 3);
-            $table->integer('parent_id')->unsigned();
-        });
+        if (!Schema::hasTable(self::$table)) {
+            Schema::create(self::$table, function (Blueprint $table)
+            {
+                $table->increments('id');
+                $table->string('name', 255)->index();
+                $table->tinyInteger('type')->unsigned();
+                $table->integer('parent_id')->unsigned()->default(0);
+            });
+        }
     }
 
     /**
@@ -28,6 +33,6 @@ class CreateTaxonomiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taxonomies');
+        Schema::dropIfExists(self::$table);
     }
 }

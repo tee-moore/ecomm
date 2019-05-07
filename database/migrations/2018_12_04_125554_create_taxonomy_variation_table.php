@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTaxonomyVariationTable extends Migration
 {
+    protected static $table = 'products';
+
     /**
      * Run the migrations.
      *
@@ -13,13 +15,16 @@ class CreateTaxonomyVariationTable extends Migration
      */
     public function up()
     {
-        Schema::create('taxonomy_variation', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('variation_id')->unsigned();
-            $table->foreign('variation_id')->references('id')->on('variations')->onDelete('restrict')->onUpdate('cascade');
-            $table->integer('taxonomy_id')->unsigned();
-            $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onDelete('restrict')->onUpdate('cascade');
-        });
+        if (!Schema::hasTable(self::$table)) {
+            Schema::create(self::$table, function (Blueprint $table)
+            {
+                $table->increments('id');
+                $table->integer('variation_id')->unsigned();
+                $table->foreign('variation_id')->references('id')->on('variations')->onDelete('restrict')->onUpdate('cascade');
+                $table->integer('taxonomy_id')->unsigned();
+                $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onDelete('restrict')->onUpdate('cascade');
+            });
+        }
     }
 
     /**
@@ -29,6 +34,6 @@ class CreateTaxonomyVariationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taxonomy_variation');
+        Schema::dropIfExists(self::$table);
     }
 }

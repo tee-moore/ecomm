@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AtributesTableSeeder extends Seeder
 {
+    protected static $table = 'attributes';
+
     /**
      * Run the database seeds.
      *
@@ -11,9 +14,9 @@ class AtributesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('attributes')->insert([
+        DB::table(self::$table)->insert([
             ['name' => 'Color'],
-            ['name' => 'Size']
+            ['name' => 'Size'],
         ]);
     }
 }

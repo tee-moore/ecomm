@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateVariationsTable extends Migration
 {
+    protected static $table = 'variations';
+
     /**
      * Run the migrations.
      *
@@ -13,21 +15,24 @@ class CreateVariationsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('variations')) {
-            Schema::create('variations', function (Blueprint $table) {
+        if (!Schema::hasTable(self::$table)) {
+            Schema::create(self::$table, function (Blueprint $table)
+            {
                 $table->increments('id');
                 $table->integer('product_id')->unsigned();
                 $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict')->onUpdate('cascade');
                 $table->string('sku', 255)->default('');
-                $table->string('image', 255)->nullable();
+                $table->string('image', 30)->default('');
                 $table->decimal('price', 8, 2)->default(0);
                 $table->decimal('discount_price', 8, 2)->default(0);
-                $table->integer('quantity')->unsigned()->default(0);
-                $table->boolean('disabled')->default(0);
-                $table->boolean('deleted')->default(0);
+                $table->smallInteger('quantity')->unsigned()->default(0);
+                $table->text('description')->default('');
+                $table->boolean('active')->default(1);
+                $table->tinyInteger('status')->unsigned()->default(0);
+                $table->softDeletes();
                 $table->timestamps();
-                $table->engine = 'InnoDB';
-                $table->charset = 'utf8';
+                $table->engine    = 'InnoDB';
+                $table->charset   = 'utf8';
                 $table->collation = 'utf8_unicode_ci';
             });
         }
@@ -40,6 +45,6 @@ class CreateVariationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variations');
+        Schema::dropIfExists(self::$table);
     }
 }

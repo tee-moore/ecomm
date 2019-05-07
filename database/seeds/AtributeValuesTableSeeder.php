@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class AtributeValuesTableSeeder extends Seeder
+class AtributValuesTableSeeder extends Seeder
 {
+    protected static $table = 'attribute_values';
+
     /**
      * Run the database seeds.
      *
@@ -11,13 +14,31 @@ class AtributeValuesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('attribute_values')->insert([
-            ['attribute_id' => 1, 'value' => 'Red'],
-            ['attribute_id' => 1, 'value' => 'Blue'],
-            ['attribute_id' => 1, 'value' => 'Green'],
-            ['attribute_id' => 2, 'value' => 'Small'],
-            ['attribute_id' => 2, 'value' => 'Medium'],
-            ['attribute_id' => 2, 'value' => 'Large'],
+        DB::table(self::$table)->insert([
+            [
+                'attribute_id' => 1,
+                'value'        => 'Red',
+            ],
+            [
+                'attribute_id' => 1,
+                'value'        => 'Blue',
+            ],
+            [
+                'attribute_id' => 1,
+                'value'        => 'Green',
+            ],
+            [
+                'attribute_id' => 2,
+                'value'        => 'Small',
+            ],
+            [
+                'attribute_id' => 2,
+                'value'        => 'Medium',
+            ],
+            [
+                'attribute_id' => 2,
+                'value'        => 'Large',
+            ],
         ]);
     }
 }
