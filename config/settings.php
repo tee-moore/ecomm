@@ -2,11 +2,56 @@
 
 return [
 
-    'folder' => [
-        'products' => 'storage/images/products/',
-        'users' => 'storage/images/users/',
+    'product' => [
+
+        'image' => [
+            'folder'  => 'storage/images/products/',
+            'default' => 'default.png',
+        ],
+
+        'type' => [
+            'simple'   => 0,
+            'variable' => 1,
+        ],
+
+        'active' => [
+            'false' => 0,
+            'true'  => 1,
+        ],
+
+        'status' => [
+            'published' => 0,
+            'review'    => 1,
+            'draft'     => 2,
+        ],
+
     ],
-    'defaultProductImage' => 'default/product.png',
-    'defaultUserImage' => 'default/user.png',
+
+    'user' => [
+
+        'image' => [
+            'folder'  => 'storage/images/users/',
+            'default' => 'default.png',
+        ],
+
+    ],
+
+    'media' => [
+
+        'type' => [
+            'image' => 0,
+            'video' => 1,
+        ],
+
+    ],
+
+    'taxonomy' => [
+
+        'type' => [
+            'category' => 0,
+            'tag'      => 1,
+        ],
+        
+    ],
 
 ];
