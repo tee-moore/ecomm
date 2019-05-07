@@ -1,18 +1,11 @@
 <?php
 
-namespace App\Models\Product;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Specification extends Model
 {
-    /**
-     * Indicates if the model should be incremented.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
-
     /**
      * Indicates if the model should be timestamped.
      *

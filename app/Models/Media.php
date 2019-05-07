@@ -20,4 +20,11 @@ class Media extends Model
         'parent_id',
         'parent_type'
     ];
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
 }

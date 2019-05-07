@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Product;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +19,8 @@ class AttributeValue extends Model
      * @var array
      */
     protected $fillable = [
-        'attribute_id', 'value'
+        'attribute_id',
+        'value',
     ];
 
     /**

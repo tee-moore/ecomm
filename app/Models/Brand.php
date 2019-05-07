@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Models\Product;
+namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Attribute extends Model
+class Brand extends Model
 {
     /**
      * Indicates if the model should be timestamped.
@@ -19,7 +20,9 @@ class Attribute extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
+        'slug',
+        'description',
     ];
 
     /**
@@ -30,10 +33,18 @@ class Attribute extends Model
     protected $guarded = [];
 
     /**
-     * Get the specifications for the attribute.
+     * Get the manager of the brand.
      */
-    public function specifications()
+    public function users()
     {
-        return $this->hasMany(Specification::class);
+        return $this->hasMany(User::class);
+    }
+
+    /**
+     * Get the products for the shop.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }

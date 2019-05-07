@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Product;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use Sluggable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -15,8 +15,23 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'main_sku', 'shop_id', 'author_id', 'description', 'gallery', 'disabled', 'deleted', 'product_type'
+        'name',
+        'slug',
+        'sku',
+        'brand_id',
+        'gallery',
+        'description',
+        'product_type',
+        'active',
+        'status',
     ];
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
 
     /**
      * Get the brand that owns the product.

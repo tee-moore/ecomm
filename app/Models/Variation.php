@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Product;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class Variation extends Model
      * @var array
      */
     protected $fillable = [
-        'product_id', 'sku', 'image', 'price', 'discount_price', 'quantity', 'disabled', 'deleted'
+        'product_id', 'sku', 'price', 'discount_price', 'quantity', 'description', 'active', 'status'
     ];
 
     /**

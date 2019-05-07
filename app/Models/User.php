@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\User;
+namespace App\Models;
 
 use App\Models\Product\Brand;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'user_id'
+        'name', 'email', 'password', 'role_id', 'brand_id'
     ];
 
     /**
@@ -30,7 +30,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The model's default values for attributes.
+     * The model's default values for attributes = "USER".
      *
      * @var array
      */
