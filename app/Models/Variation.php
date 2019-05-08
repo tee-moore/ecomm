@@ -23,7 +23,7 @@ class Variation extends Model
     protected $guarded = [];
 
     /**
-     * Get the product that owns the variation.
+     * Get the product associated with the variation.
      */
     public function product()
     {
@@ -31,7 +31,7 @@ class Variation extends Model
     }
 
     /**
-     * Get the specifications for the variation.
+     * Get the specifications associated with the variation.
      */
     public function  specifications()
     {
@@ -39,10 +39,18 @@ class Variation extends Model
     }
 
     /**
-     * The taxonomies that belong to the variation.
+     * Get the taxonomies associated with the variation.
      */
     public function taxonomies()
     {
         return $this->belongsToMany(Taxonomy::class);
+    }
+
+    /**
+     * Get the media associated with the variation.
+     */
+    public function media()
+    {
+        return $this->morphMany(Media::class, 'parent');
     }
 }
