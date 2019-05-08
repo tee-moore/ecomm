@@ -3,10 +3,10 @@
 namespace App\Helpers;
 
 use App\Helpers\Contracts\SpecificationInterface;
-use App\Models\Product\Product;
-use App\Models\Product\Specification;
-use App\Models\Product\Attribute;
-use App\Models\Product\AttributeValue;
+use App\Models\Product;
+use App\Models\Specification;
+use App\Models\Attribute;
+use App\Models\AttributeValue;
 
 class SpecificationHelper implements SpecificationInterface
 {

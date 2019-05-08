@@ -180,6 +180,7 @@ return [
          */
         \App\Providers\ProductServiceProvider::class,
         \App\Providers\SpecificationServiceProvider::class,
+        \App\Providers\MediaServiceProvider::class,
     ],
 
     /*

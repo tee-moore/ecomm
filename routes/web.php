@@ -13,10 +13,10 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('index');
 
 Route::get('/products', 'ProductController@index')->name('product.index');
-Route::get('/product/{product}', 'ProductController@show')->name('product.show')->where('product', '[A-Za-z0-9_]+');
+Route::get('/product/{product}', 'ProductController@show')->name('product.show');
 
 Route::get('/brands', 'BrandController@index')->name('brand.index');
 Route::get('/brand/{brand}', 'BrandController@show')->name('brand.show')->where('brand', '[A-Za-z0-9_]');

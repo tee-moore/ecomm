@@ -3,13 +3,14 @@
 namespace App\Helpers;
 
 use App\Helpers\Contracts\ProductInterface;
-use App\Models\Product\Product;
-use App\Models\Product\Attribute;
-use App\Models\Product\AttributeValue;
-use App\Models\Product\Variation;
-use App\Models\Product\Specification;
+use App\Models\Product;
+use App\Models\Attribute;
+use App\Models\AttributeValue;
+use App\Models\Variation;
+use App\Models\Specification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class ProductHelper implements ProductInterface
 {
@@ -18,7 +19,7 @@ class ProductHelper implements ProductInterface
      */
     public function getAll()
     {
-        return Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->where('deleted', 0)->get();
+        return Product::with(['variations.specifications.attribute', 'variations.specifications.value'])->get();
     }
 
     /**

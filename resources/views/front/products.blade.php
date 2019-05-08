@@ -16,10 +16,10 @@
 
                         <ul>
                         @foreach ($products as $product)
-                            <li><a href="product/{{ $product->slug }}">
+                            <li><a href="{{ route('product.show', ['product' => $product->slug]) }}">
                                     <img src="{{ asset('storage/images/products/' . $product->variations[0]->image)}}" width="50" height="50">
                                 </a>
-                                <a href="product/{{ $product->slug }}">{{ $product->name }}</a>
+                                <a href="{{ route('product.show', ['product' => $product->slug]) }}">{{ $product->name }}</a>
                             </li>
                         @endforeach
                         </ul>

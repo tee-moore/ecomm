@@ -14,10 +14,8 @@ class ProductController extends MainController
     protected $products;
 
     /**
-     * Create a new controller instance.
-     *
-     * @param  ProductAbstract  $products
-     * @return void
+     * ProductController constructor.
+     * @param ProductInterface $products
      */
     public function __construct(ProductInterface $products)
     {
@@ -66,7 +64,7 @@ class ProductController extends MainController
      * @param str $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show(string $slug)
     {
         $product = $this->products->getOneBySlug($slug);
         return view('front.product')->with('product', $product);

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Product\Brand;
+use App\Models\Brand;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;

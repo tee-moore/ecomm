@@ -15,8 +15,8 @@
                     @endif
 
                     <ul>
-                        <li><a href='/products'>Products</a></li>
-                        <li><a href='/admin'>Admin</a></li>
+                        <li><a href='{{route('product.index')}}'>Products</a></li>
+                        <li><a href='{{route('admin.index')}}'>Admin</a></li>
                     </ul>
 
                 </div>
