@@ -29,6 +29,7 @@ class CreateMediaTable extends Migration
                 $table->engine    = 'InnoDB';
                 $table->charset   = 'utf8';
                 $table->collation = 'utf8_unicode_ci';
+                // TODO think about index for morph relation (parent_id and parent_type)
             });
         }
     }
