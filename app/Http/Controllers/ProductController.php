@@ -3,37 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Helpers\Contracts\ProductInterface;
-
+use App\Models\Product;
 
 class ProductController extends MainController
 {
     /**
-     * The products repository instance.
-     */
-    protected $products;
-
-    /**
      * ProductController constructor.
-     * @param ProductInterface $products
      */
-    public function __construct(ProductInterface $products)
+    public function __construct()
     {
         parent::__construct();
-
-        $this->products = $products;
-//        $this->products = app()->make(ProductAbstract::class);
     }
-
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $products = $this->products->getAll();
+        $products = Product::all();
         return view('front.products')->with('products', $products);
     }
 
@@ -61,12 +50,12 @@ class ProductController extends MainController
     /**
      * Display the specified resource.
      *
-     * @param str $slug
-     * @return \Illuminate\Http\Response
+     * @param string $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(string $slug)
     {
-        $product = $this->products->getOneBySlug($slug);
+        $product = Product::with('variations.specifications')->where('slug', $slug)->firstOrFail();
         return view('front.product')->with('product', $product);
     }
 
