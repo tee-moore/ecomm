@@ -27,4 +27,12 @@ class Media extends Model
      * @var array
      */
     protected $guarded = [];
+
+    /**
+     * Get the products|variations|brands|users associated with the media.
+     */
+    public function parent()
+    {
+        return $this->morphTo();
+    }
 }

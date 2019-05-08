@@ -34,7 +34,7 @@ class Product extends Model
     protected $guarded = [];
 
     /**
-     * Get the brand that owns the product.
+     * Get the brand that associated with the product.
      */
     public function brand()
     {
@@ -42,10 +42,18 @@ class Product extends Model
     }
 
     /**
-     * Get the variations for the product.
+     * Get the variations associated with the product.
      */
     public function variations()
     {
         return $this->hasMany(Variation::class);
+    }
+
+    /**
+     * Get the media associated with the product.
+     */
+    public function media()
+    {
+        return $this->morphMany(Media::class, 'parent');
     }
 }

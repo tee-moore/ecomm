@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Brand;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -40,10 +39,26 @@ class User extends Authenticatable
 
 
     /**
-     * Get the brand record associated with the user as manager.
+     * Get the brand associated with the user.
      */
     public function brand()
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    /**
+     * Get the role associated with the user.
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Get the media associated with the user.
+     */
+    public function media()
+    {
+        return $this->morphMany(Media::class, 'parent');
     }
 }

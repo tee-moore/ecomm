@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
@@ -33,7 +32,7 @@ class Brand extends Model
     protected $guarded = [];
 
     /**
-     * Get the manager of the brand.
+     * Get the user associated with the brand.
      */
     public function users()
     {
@@ -41,10 +40,18 @@ class Brand extends Model
     }
 
     /**
-     * Get the products for the shop.
+     * Get the products associated with the brand.
      */
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Get the media associated with the brand.
+     */
+    public function media()
+    {
+        return $this->morphMany(Media::class, 'parent');
     }
 }
