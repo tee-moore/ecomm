@@ -19,7 +19,7 @@ class CreateAttributesTable extends Migration
             Schema::create(self::$table, function (Blueprint $table)
             {
                 $table->increments('id');
-                $table->string('name', 255)->index();
+                $table->string('name', 255)->unique();
                 $table->text('description')->nullable();
                 $table->engine    = 'InnoDB';
                 $table->charset   = 'utf8';
