@@ -30,7 +30,7 @@ class Taxonomy extends Model
     protected $guarded = [];
 
     /**
-     * The variations that belong to the taxonomy.
+     * Get the variations that associated with the taxonomy.
      */
     public function variations()
     {

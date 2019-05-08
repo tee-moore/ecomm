@@ -30,7 +30,7 @@ class Specification extends Model
     protected $guarded = [];
 
     /**
-     * Get the variation that owns the specification.
+     * Get the variation associated with the specification.
      */
     public function variation()
     {
@@ -38,7 +38,7 @@ class Specification extends Model
     }
 
     /**
-     * Get the attribute that owns the specification.
+     * Get the attribute associated with the specification.
      */
     public function attribute()
     {
@@ -46,7 +46,7 @@ class Specification extends Model
     }
 
     /**
-     * Get the value that owns the specification.
+     * Get the attribute value associated with the specification.
      */
     public function value()
     {

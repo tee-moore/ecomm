@@ -31,7 +31,7 @@ class Attribute extends Model
     protected $guarded = [];
 
     /**
-     * Get the specifications for the attribute.
+     * Get the specifications associated with the attribute.
      */
     public function specifications()
     {

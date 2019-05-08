@@ -31,7 +31,7 @@ class AttributeValue extends Model
     protected $guarded = [];
 
     /**
-     * Get the specifications for the attribute value.
+     * Get the specifications associated with the attribute value.
      */
     public function specifications()
     {

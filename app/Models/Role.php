@@ -28,4 +28,12 @@ class Role extends Model
      * @var array
      */
     protected $guarded = [];
+
+    /**
+     * Get the users associated with the role
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
