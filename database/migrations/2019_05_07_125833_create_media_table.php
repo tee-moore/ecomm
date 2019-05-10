@@ -19,11 +19,11 @@ class CreateMediaTable extends Migration
             Schema::create(self::$table, function (Blueprint $table)
             {
                 $table->increments('id');
-                $table->string('title', 255);
+                $table->string('title', 255)->default('');;
                 $table->string('alt', 255)->default('');
-                $table->string('url', 255);
+                $table->string('url', 255)->unique();
                 $table->text('description')->nullable();
-                $table->tinyInteger('type')->unsigned();
+                $table->tinyInteger('media_type')->unsigned();
                 $table->integer('parent_id')->unsigned();
                 $table->tinyInteger('parent_type')->unsigned();
                 $table->engine    = 'InnoDB';
