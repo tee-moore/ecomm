@@ -15,7 +15,7 @@
                         @endif
 
                         <div class="col-md-5">
-                            <img src="{{ asset('storage/images/products/' . $product->variations[0]->image)}}" width="300" height="300">
+                            <img src="{{ asset( $path . $product->variations[0]->image)}}" width="300" height="300">
                         </div>
 
                         <div class="col-md-7">
