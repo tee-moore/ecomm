@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Variation;
+use Illuminate\Support\Facades\DB;
 
 class VariationsTableSeeder extends Seeder
 {
+    protected static $table = 'variations';
+
     /**
      * Run the database seeds.
      *
@@ -12,7 +14,7 @@ class VariationsTableSeeder extends Seeder
      */
     public function run()
     {
-        $variations = [
+        DB::table(self::$table)->insert([
             [
                 'product_id' => 1,
                 'sku' => 'originals-pharrell-williams-blue',
@@ -27,7 +29,7 @@ class VariationsTableSeeder extends Seeder
             ],
             [
                 'product_id' => 2,
-                'sku' => 'yeezy-boost-750-og-green',
+                'sku' => 'yeezy-boost-750-og-orange',
                 'price' => 6500.00,
                 'quantity' => 10,
             ],
@@ -91,10 +93,6 @@ class VariationsTableSeeder extends Seeder
                 'price' => 159.30,
                 'quantity' => 150,
             ]
-        ];
-
-        foreach($variations as $variation) {
-            Variation::create($variation);
-        }
+        ]);
     }
 }

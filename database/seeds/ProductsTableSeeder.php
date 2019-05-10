@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ProductsTableSeeder extends Seeder
 {
+    protected static $table = 'products';
+
     /**
      * Run the database seeds.
      *
@@ -13,7 +15,7 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        $products = [
+        DB::table(self::$table)->insert([
             [
                 'name'         => 'Originals Pharrell Williams',
                 'slug'         => Str::slug('Originals Pharrell Williams'),
@@ -63,10 +65,6 @@ class ProductsTableSeeder extends Seeder
                 'gallery'      => '',
                 'product_type' => 0,
             ],
-        ];
-
-        foreach ($products as $product) {
-            Product::create($product);
-        }
+        ]);
     }
 }
