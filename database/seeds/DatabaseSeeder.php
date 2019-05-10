@@ -11,17 +11,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        truncateAllTables();
+
         $this->call([
-//            RolesTableSeeder::class,
-//            BrandsTableSeeder::class,
-//            UsersTableSeeder::class,
-//            ProductsTableSeeder::class,
-//            VariationsTableSeeder::class,
-//            AtributesTableSeeder::class,
-//            AtributeValuesTableSeeder::class,
-//            SpecificationsTableSeeder::class,
-//            TaxonomiesTableSeeder::class,
-//            VariationTaxonomyTableSeeder::class,
+            RolesTableSeeder::class,
+            BrandsTableSeeder::class,
+            UsersTableSeeder::class,
+            ProductsTableSeeder::class,
+            VariationsTableSeeder::class,
+            AtributesTableSeeder::class,
+            AtributeValuesTableSeeder::class,
+            SpecificationsTableSeeder::class,
+            TaxonomiesTableSeeder::class,
+            VariationTaxonomyTableSeeder::class,
+            MediaTableSeeder::class,
         ]);
     }
 }
