@@ -50,8 +50,8 @@ class Brand extends Model
     /**
      * Get the media associated with the brand.
      */
-    public function media()
+    public function logo()
     {
-        return $this->morphMany(Media::class, 'parent');
+        return $this->morphToMany(Media::class, 'attachment');
     }
 }

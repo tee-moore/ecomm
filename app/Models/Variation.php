@@ -49,8 +49,8 @@ class Variation extends Model
     /**
      * Get the media associated with the variation.
      */
-    public function media()
+    public function attachments()
     {
-        return $this->morphMany(Media::class, 'parent');
+        return $this->morphToMany(Media::class, 'attached_to', 'attachments');
     }
 }

@@ -18,7 +18,7 @@ class Media extends Model
         'description',
         'type',
         'parent_id',
-        'parent_type'
+        'parent_type',
     ];
 
     /**
@@ -29,10 +29,34 @@ class Media extends Model
     protected $guarded = [];
 
     /**
-     * Get the products|variations|brands|users associated with the media.
+     * Get the products associated with the media.
      */
-    public function parent()
+    public function attachedToProducts()
     {
-        return $this->morphTo();
+        return $this->morphedByMany(Product::class, 'attached_to', 'attachments');
+    }
+
+    /**
+     * Get the variations associated with the media.
+     */
+    public function attachedToVariations()
+    {
+        return $this->morphedByMany(Variation::class, 'attached_to', 'attachments');
+    }
+
+    /**
+     * Get the brands associated with the media.
+     */
+    public function attachedLogoTo()
+    {
+        return $this->morphedByMany(Brand::class, 'attached_to', 'attachments');
+    }
+
+    /**
+     * Get the users associated with the media.
+     */
+    public function attachedAvatarTo()
+    {
+        return $this->morphedByMany(User::class, 'attached_to', 'attachments');
     }
 }

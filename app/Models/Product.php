@@ -52,8 +52,8 @@ class Product extends Model
     /**
      * Get the media associated with the product.
      */
-    public function media()
+    public function gallery()
     {
-        return $this->morphMany(Media::class, 'parent');
+        return $this->morphToMany(Media::class, 'attached_to', 'attachments');
     }
 }

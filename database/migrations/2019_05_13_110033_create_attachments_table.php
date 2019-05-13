@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMediaTable extends Migration
+class CreateAttachmentsTable extends Migration
 {
-    protected static $table = 'media';
+    protected static $table = 'attachments';
 
     /**
      * Run the migrations.
@@ -19,11 +19,10 @@ class CreateMediaTable extends Migration
             Schema::create(self::$table, function (Blueprint $table)
             {
                 $table->increments('id');
-                $table->string('title', 255)->default('');;
-                $table->string('alt', 255)->default('');
-                $table->string('url', 255)->unique();
-                $table->text('description')->nullable();
-                $table->tinyInteger('media_type')->unsigned();
+                $table->integer('media_id')->unsigned();
+                $table->foreign('media_id')->references('id')->on('media')->onDelete('restrict')->onUpdate('cascade');
+                $table->integer('attached_to_id')->unsigned();
+                $table->string('attached_to_type');
                 $table->engine    = 'InnoDB';
                 $table->charset   = 'utf8';
                 $table->collation = 'utf8_unicode_ci';

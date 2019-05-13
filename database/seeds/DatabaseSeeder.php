@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             TaxonomiesTableSeeder::class,
             VariationTaxonomyTableSeeder::class,
             MediaTableSeeder::class,
+            AttachmentsTableSeeder::class,
         ]);
     }
 }

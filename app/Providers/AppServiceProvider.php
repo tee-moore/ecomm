@@ -30,10 +30,10 @@ class AppServiceProvider extends ServiceProvider
     {
         // for poly morph relation Media tables
         Relation::morphMap([
-            0 => Product::class,
-            1 => Variation::class,
-            2 => Brand::class,
-            3 => User::class,
+            'product' => 'App\Models\Product',
+            'variation' => 'App\Models\Variation',
+            'brand' => 'App\Models\Brand',
+            'user' => 'App\Models\User',
         ]);
     }
 }

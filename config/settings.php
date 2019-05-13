@@ -43,13 +43,6 @@ return [
             'video' => 1,
         ],
 
-        'parent' => [
-            'product' => 0,
-            'variation' => 1,
-            'brand' => 2,
-            'user' => 3,
-        ],
-
     ],
 
     'taxonomy' => [

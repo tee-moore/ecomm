@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Media;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -22,7 +23,7 @@ class ProductController extends MainController
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('variations.attachments', 'gallery')->get();
         return view('front.products', [
             'products' => $products,
             'path'     => config('settings.product.image.folder'),

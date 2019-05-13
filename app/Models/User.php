@@ -57,8 +57,8 @@ class User extends Authenticatable
     /**
      * Get the media associated with the user.
      */
-    public function media()
+    public function avatar()
     {
-        return $this->morphMany(Media::class, 'parent');
+        return $this->morphToMany(Media::class, 'attachment');
     }
 }
