@@ -2,10 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Brand;
-use App\Models\Product;
-use App\Models\User;
-use App\Models\Variation;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 

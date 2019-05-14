@@ -16,9 +16,18 @@
 
                         <ul>
                         @foreach ($products as $product)
-                            <li><a href="{{ route('product.show', ['product' => $product->slug]) }}">
-                                    <img src="{{ asset( $path . $product->variations[0]->image)}}" width="50" height="50">
-                                </a>
+
+                            <li>
+                                @if (count($product->gallery) === 1)
+                                    <img src="{{ asset( $path . $product->gallery[0]->url)}}" width="50" height="50">
+                                @else
+                                    @if(count($product->variations[0]->attachments) === 1)
+                                        <img src="{{ asset( $path . $product->variations[0]->attachments[0]->url)}}" width="50" height="50">
+                                    @else
+                                        <img src="{{ asset( $path . config('settings.product.image.default'))}}" width="50" height="50">
+                                    @endif
+                                @endif
+
                                 <a href="{{ route('product.show', ['product' => $product->slug]) }}">{{ $product->name }}</a>
                             </li>
                         @endforeach

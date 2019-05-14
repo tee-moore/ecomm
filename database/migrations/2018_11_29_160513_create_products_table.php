@@ -24,7 +24,6 @@ class CreateProductsTable extends Migration
                 $table->string('sku', 255)->default('');
                 $table->integer('brand_id')->unsigned();
                 $table->foreign('brand_id')->references('id')->on('brands')->onDelete('restrict')->onUpdate('cascade');
-                $table->string('gallery', 30)->default('');
                 $table->text('description')->nullable();
                 $table->tinyInteger('product_type')->unsigned()->default(0);
                 $table->boolean('active')->default(1);
