@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 
-if (!function_exists('app_name')) {
+if (!function_exists('truncateAllTables')) {
     function truncateAllTables()
     {
         DB::statement("SET foreign_key_checks=0");
