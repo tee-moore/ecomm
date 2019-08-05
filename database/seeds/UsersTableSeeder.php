@@ -22,6 +22,8 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => 'UwpybRuF2jtzGqWQnxGd4tTsZBizXAk2TKRjhqZPgAPsqwDbCSqPndsea3fC',
                 'role_id' => 1,
                 'brand_id' => 1,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'name' => 'owner_adidas',
@@ -30,6 +32,8 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => '0tnpAVRVIfeil5bZBk4voLSAoX9UAirCE9ntKVNgnA2LXqDX4Z8W1T46KqRi',
                 'role_id' => 2,
                 'brand_id' => 2,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'name' => 'manager_adidas',
@@ -38,6 +42,8 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => 'A5P8ziCRIfgvbW1hb0UHSJqvnmEegaO5fTAKYLxolvlbnIasKEQWOGW2Zmmc',
                 'role_id' => 3,
                 'brand_id' => 2,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'name' => 'owner_collins',
@@ -46,6 +52,8 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => '0tnpAVRVIfeil5bZBk4voLSAoX9UAirCE9ntKVNgnA2LXqDX4Z8W1T46KqRi',
                 'role_id' => 2,
                 'brand_id' => 3,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'name' => 'manager_collins',
@@ -54,6 +62,8 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => 'A5P8ziCRIfgvbW1hb0UHSJqvnmEegaO5fTAKYLxolvlbnIasKEQWOGW2Zmmc',
                 'role_id' => 3,
                 'brand_id' => 3,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'name' => 'owner_zhytomyrskye_nosky',
@@ -62,6 +72,8 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => '0tnpAVRVIfeil5bZBk4voLSAoX9UAirCE9ntKVNgnA2LXqDX4Z8W1T46KqRi',
                 'role_id' => 2,
                 'brand_id' => 4,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'name' => 'manager_zhytomyrskye_nosky',
@@ -70,6 +82,8 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => 'A5P8ziCRIfgvbW1hb0UHSJqvnmEegaO5fTAKYLxolvlbnIasKEQWOGW2Zmmc',
                 'role_id' => 3,
                 'brand_id' => 4,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ],
         ]);
     }
