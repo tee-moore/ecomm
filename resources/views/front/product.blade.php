@@ -1,13 +1,12 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ $product->name }}</div>
-
                     <div class="card-body row">
+
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
@@ -15,7 +14,18 @@
                         @endif
 
                         <div class="col-md-5">
-                            <img src="{{ asset( $path . $product->variations[0]->image)}}" width="300" height="300">
+                            <div class="gallery">
+                                <div class="carousel">
+                                    @foreach ($product->gallery as $image)
+                                        <img src="{{ asset( $productFolder . $image->url )}}" @if($loop->first){{$activeClass}}@endif width="300" height="300">
+                                    @endforeach
+                                </div>
+                                <div class="thumbnails">
+                                    @foreach ($product->gallery as $image)
+                                        <img src="{{ asset( $productFolder . $image->url )}}" @if($loop->first){{$activeClass}}@endif width="50" height="50">
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-7">

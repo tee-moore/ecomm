@@ -6,3 +6,11 @@ ul {
   list-style: none;
 }
 
+.carousel img:not(.active) {
+  display: none;
+}
+
+.thumbnails img {
+  cursor: pointer;
+}
+

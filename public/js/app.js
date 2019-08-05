@@ -139,10 +139,10 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\ecomm.loc\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\OSPanel\domains\ecomm.loc\resources\sass\bootstrap.scss */"./resources/sass/bootstrap.scss");
-__webpack_require__(/*! C:\OSPanel\domains\ecomm.loc\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\ecomm.loc\resources\sass\admin\admin.scss */"./resources/sass/admin/admin.scss");
+__webpack_require__(/*! D:\OSPanel\domains\ecomm.loc\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\OSPanel\domains\ecomm.loc\resources\sass\bootstrap.scss */"./resources/sass/bootstrap.scss");
+__webpack_require__(/*! D:\OSPanel\domains\ecomm.loc\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\ecomm.loc\resources\sass\admin\admin.scss */"./resources/sass/admin/admin.scss");
 
 
 /***/ })

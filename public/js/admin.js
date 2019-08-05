@@ -106,7 +106,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\ecomm.loc\resources\js\admin\admin.js */"./resources/js/admin/admin.js");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\ecomm.loc\resources\js\admin\admin.js */"./resources/js/admin/admin.js");
 
 
 /***/ })
