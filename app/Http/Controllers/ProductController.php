@@ -22,13 +22,14 @@ class ProductController extends MainController
     public function index(Request $request)
     {
         $products = Product::with('mainPicture');
+        $output   = config('settings.product.output');
 
-//        $products->whereHas('gallery', function ($query) use ($request)
-//        {
-//            $query->orderBy('attachments.options', 'ASC');
-//        });
+        //        $products->whereHas('gallery', function ($query) use ($request)
+        //        {
+        //            $query->orderBy('attachments.options', 'ASC');
+        //        });
 
-        $products = $products->paginate(12);
+        $products = $products->paginate($output);
 
         $view = 'front.products';
 
@@ -43,7 +44,7 @@ class ProductController extends MainController
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $view    = 'front.product';
+        $view = 'front.product';
 
         return view($view, [
             'product' => $product,

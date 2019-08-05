@@ -25,6 +25,8 @@ return [
             'draft'     => 2,
         ],
 
+        'output' => 12,
+
     ],
 
     'user' => [
