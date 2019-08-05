@@ -23,7 +23,7 @@ class CreateMediaTable extends Migration
                 $table->string('alt', 255)->default('');
                 $table->string('url', 255)->unique();
                 $table->text('description')->nullable();
-                $table->tinyInteger('media_type')->unsigned();
+                $table->tinyInteger('type')->unsigned();
                 $table->engine    = 'InnoDB';
                 $table->charset   = 'utf8';
                 $table->collation = 'utf8_unicode_ci';

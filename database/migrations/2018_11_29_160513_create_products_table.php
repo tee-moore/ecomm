@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
                 $table->integer('brand_id')->unsigned();
                 $table->foreign('brand_id')->references('id')->on('brands')->onDelete('restrict')->onUpdate('cascade');
                 $table->text('description')->nullable();
-                $table->tinyInteger('product_type')->unsigned()->default(0);
+                $table->tinyInteger('type')->unsigned()->default(0);
                 $table->boolean('active')->default(1);
                 $table->tinyInteger('status')->unsigned()->default(0);
                 $table->softDeletes();
