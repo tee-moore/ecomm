@@ -17,6 +17,19 @@ class HelperServiceProvider extends ServiceProvider
     }
 
     /**
+     * Required all helper files
+     *
+     * @return void
+     */
+    protected function loadHelpers()
+    {
+        foreach (glob(__DIR__.'/../Helpers/*.php') as $filename)
+        {
+            require_once $filename;
+        }
+    }
+
+    /**
      * Bootstrap services.
      *
      * @return void
@@ -24,13 +37,5 @@ class HelperServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-    }
-
-    protected function loadHelpers()
-    {
-        foreach (glob(__DIR__.'/../Helpers/*.php') as $filename)
-        {
-            require_once $filename;
-        }
     }
 }

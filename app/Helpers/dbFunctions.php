@@ -2,20 +2,33 @@
 
 use Illuminate\Support\Facades\DB;
 
-if (!function_exists('truncateAllTables')) {
-    function truncateAllTables()
+if (!function_exists('truncate')) {
+    function truncate($tableName = null)
     {
-        DB::statement("SET foreign_key_checks=0");
-        $databaseName = env('DB_DATABASE', 'ecomm');
+        $database = env('DB_DATABASE', 'ecomm');
 
-        $tables = DB::select("SELECT * FROM information_schema.tables WHERE table_schema = '$databaseName'");
-        foreach ($tables as $table) {
-            $name = $table->TABLE_NAME;
-            if ($name == 'migrations') {
-                continue;
-            }
-            DB::table($name)->truncate();
+        if ($tableName) {
+            $tables = DB::select("SELECT * FROM information_schema.tables WHERE table_name = '$tableName'");
+        } else {
+            $tables = DB::select("SELECT * FROM information_schema.tables WHERE table_schema = '$database'");
         }
-        DB::statement("SET foreign_key_checks=1");
+
+        if ($tables) {
+            DB::statement("SET foreign_key_checks=0");
+            foreach ($tables as $table) {
+                $name = $table->TABLE_NAME;
+                if ($name == 'migrations') {
+                    continue;
+                }
+                DB::table($name)->truncate();
+            }
+            DB::statement("SET foreign_key_checks=1");
+
+            return true;
+        } else {
+            echo "truncate: Tables does not exist";
+        }
+
+        return false;
     }
 }
