@@ -16,7 +16,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('index');
 
 Route::get('/products', 'ProductController@index')->name('product.index');
-Route::get('/product/{product}', 'ProductController@show')->name('product.show');
+Route::get('/product/{slug}', 'ProductController@show')->name('product.show');
 
 Route::get('/brands', 'BrandController@index')->name('brand.index');
 Route::get('/brand/{brand}', 'BrandController@show')->name('brand.show')->where('brand', '[A-Za-z0-9_]');
@@ -26,8 +26,6 @@ Route::get('/category/{category}', 'CategoryController@show')->name('category.sh
 
 Route::get('/tags', 'TagController@index')->name('tag.index');
 Route::get('/tag/{tag}', 'TagController@show')->name('tag.show')->where('tag', '[A-Za-z0-9_]+');
-
-
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
