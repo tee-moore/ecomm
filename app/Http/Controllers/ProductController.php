@@ -3,100 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Models\Media;
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductController extends MainController
 {
-    /**
-     * ProductController constructor.
-     */
     public function __construct()
     {
         parent::__construct();
+
+        View::share('productFolder', config('settings.product.image.folder'));
+        View::share('productDefaultImage', config('settings.product.image.default'));
+        View::share('activeClass', 'class = active');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('variations.attachments', 'gallery')->get();
-        return view('front.products', [
+        $products = Product::with('mainPicture');
+
+//        $products->whereHas('gallery', function ($query) use ($request)
+//        {
+//            $query->orderBy('attachments.options', 'ASC');
+//        });
+
+        $products = $products->paginate(12);
+
+        $view = 'front.products';
+
+        return view($view, [
             'products' => $products,
-            'path'     => config('settings.product.image.folder'),
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function show($slug)
     {
-        //
-    }
+        $product = Product::with('gallery', 'variations.specifications.attribute', 'variations.specifications.value')
+            ->where('slug', $slug)
+            ->firstOrFail();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $view    = 'front.product';
 
-    /**
-     * Display the specified resource.
-     *
-     * @param string $slug
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show(string $slug)
-    {
-        $product = Product::with('variations.specifications')->where('slug', $slug)->firstOrFail();
-        return view('front.product', [
+        return view($view, [
             'product' => $product,
-            'path'    => config('settings.product.image.folder'),
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
