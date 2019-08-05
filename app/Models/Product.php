@@ -50,10 +50,32 @@ class Product extends Model
     }
 
     /**
-     * Get the media associated with the product.
+     * Get the all pictures associated with the product.
      */
     public function gallery()
     {
-        return $this->morphToMany(Media::class, 'attached_to', 'attachments');
+        return $this->morphToMany(Media::class, 'attached_to', 'attachments')
+            ->using(Attachment::class)
+            ->withPivot('main', 'hover', 'order', 'options')->orderBy('order', 'asc');
+    }
+
+    /**
+     * Get the main picture associated with the product.
+     */
+    public function mainPicture()
+    {
+        return $this->morphToMany(Media::class, 'attached_to', 'attachments')
+            ->using(Attachment::class)
+            ->wherePivot('main', true);
+    }
+
+    /**
+     * Get the picture for hover effect associated with the product.
+     */
+    public function hoverPicture()
+    {
+        return $this->morphToMany(Media::class, 'attached_to', 'attachments')
+            ->using(Attachment::class)
+            ->wherePivot('hover', true);
     }
 }
