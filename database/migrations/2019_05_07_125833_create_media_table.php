@@ -18,7 +18,7 @@ class CreateMediaTable extends Migration
         if (!Schema::hasTable(self::$table)) {
             Schema::create(self::$table, function (Blueprint $table)
             {
-                $table->increments('id');
+                $table->bigIncrements('id');
                 $table->string('title', 255);
                 $table->string('alt', 255)->default('');
                 $table->string('url', 255);

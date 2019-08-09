@@ -18,7 +18,7 @@ class CreateAttributesTable extends Migration
         if (!Schema::hasTable(self::$table)) {
             Schema::create(self::$table, function (Blueprint $table)
             {
-                $table->increments('id');
+                $table->bigIncrements('id');
                 $table->string('name', 255)->index();
                 $table->text('description')->nullable();
                 $table->engine    = 'InnoDB';

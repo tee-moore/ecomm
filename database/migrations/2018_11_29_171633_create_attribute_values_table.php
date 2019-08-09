@@ -18,7 +18,7 @@ class CreateAttributeValuesTable extends Migration
         if (!Schema::hasTable(self::$table)) {
             Schema::create(self::$table, function (Blueprint $table)
             {
-                $table->increments('id');
+                $table->bigIncrements('id');
                 $table->integer('attribute_id')->unsigned();
                 $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('restrict')->onUpdate('cascade');
                 $table->string('value', 255);
