@@ -18,7 +18,7 @@ class CreateVariationsTable extends Migration
         if (!Schema::hasTable(self::$table)) {
             Schema::create(self::$table, function (Blueprint $table)
             {
-                $table->increments('id');
+                $table->bigIncrements('id');
                 $table->integer('product_id')->unsigned();
                 $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict')->onUpdate('cascade');
                 $table->string('sku', 255)->default('');
