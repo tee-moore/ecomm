@@ -15,7 +15,7 @@
                         <ul>
                             @foreach ($products as $product)
                                 <li>
-                                    <a href="{{ route('product.show', ['product' => $product->slug]) }}">
+                                    <a href="{{ route('product.show', [$product->slug]) }}">
                                         <img src="{{ asset($productFolder . $product->mainPicture->first()->url) }}"width="50" height="50">
                                         {{ $product->name }}
                                     </a>
