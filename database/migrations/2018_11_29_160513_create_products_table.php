@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
                 $table->string('name', 255)->index();
                 $table->string('slug', 255)->unique();
                 $table->string('sku', 255)->default('');
-                $table->integer('brand_id')->unsigned();
+                $table->bigInteger('brand_id')->unsigned();
                 $table->foreign('brand_id')->references('id')->on('brands')->onDelete('restrict')->onUpdate('cascade');
                 $table->text('description')->nullable();
                 $table->tinyInteger('type')->unsigned()->default(0);

@@ -19,7 +19,7 @@ class CreateAttributeValuesTable extends Migration
             Schema::create(self::$table, function (Blueprint $table)
             {
                 $table->bigIncrements('id');
-                $table->integer('attribute_id')->unsigned();
+                $table->bigInteger('attribute_id')->unsigned();
                 $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('restrict')->onUpdate('cascade');
                 $table->string('value', 255);
                 $table->engine    = 'InnoDB';

@@ -21,7 +21,7 @@ class CreateTaxonomiesTable extends Migration
                 $table->bigIncrements('id');
                 $table->string('name', 255)->index();
                 $table->tinyInteger('type')->unsigned();
-                $table->integer('parent_id')->unsigned()->default(0);
+                $table->bigInteger('parent_id')->unsigned()->default(0);
             });
         }
     }

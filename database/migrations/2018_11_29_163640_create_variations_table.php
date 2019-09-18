@@ -19,7 +19,7 @@ class CreateVariationsTable extends Migration
             Schema::create(self::$table, function (Blueprint $table)
             {
                 $table->bigIncrements('id');
-                $table->integer('product_id')->unsigned();
+                $table->bigInteger('product_id')->unsigned();
                 $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict')->onUpdate('cascade');
                 $table->string('sku', 255)->default('');
                 $table->decimal('price', 8, 2)->default(0);

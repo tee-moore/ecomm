@@ -24,7 +24,7 @@ class CreateMediaTable extends Migration
                 $table->string('url', 255);
                 $table->text('description')->nullable();
                 $table->tinyInteger('type')->unsigned();
-                $table->integer('parent_id')->unsigned();
+                $table->bigInteger('parent_id')->unsigned();
                 $table->tinyInteger('parent_type')->unsigned();
                 $table->engine    = 'InnoDB';
                 $table->charset   = 'utf8';

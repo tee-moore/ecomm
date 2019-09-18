@@ -19,11 +19,11 @@ class CreateSpecificationsTable extends Migration
             Schema::create(self::$table, function (Blueprint $table)
             {
                 $table->bigIncrements('id');
-                $table->integer('variation_id')->unsigned();
+                $table->bigInteger('variation_id')->unsigned();
                 $table->foreign('variation_id')->references('id')->on('variations');
-                $table->integer('attribute_id')->unsigned();
+                $table->bigInteger('attribute_id')->unsigned();
                 $table->foreign('attribute_id')->references('id')->on('attributes');
-                $table->integer('value_id')->unsigned();
+                $table->bigInteger('value_id')->unsigned();
                 $table->foreign('value_id')->references('id')->on('attribute_values');
                 $table->engine    = 'InnoDB';
                 $table->charset   = 'utf8';

@@ -19,9 +19,9 @@ class CreateTaxonomyVariationTable extends Migration
             Schema::create(self::$table, function (Blueprint $table)
             {
                 $table->bigIncrements('id');
-                $table->integer('variation_id')->unsigned();
+                $table->bigInteger('variation_id')->unsigned();
                 $table->foreign('variation_id')->references('id')->on('variations')->onDelete('restrict')->onUpdate('cascade');
-                $table->integer('taxonomy_id')->unsigned();
+                $table->bigInteger('taxonomy_id')->unsigned();
                 $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onDelete('restrict')->onUpdate('cascade');
             });
         }

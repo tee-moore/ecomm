@@ -19,8 +19,8 @@ class CreateAttachmentsTable extends Migration
             Schema::create(self::$table, function (Blueprint $table)
             {
                 $table->increments('id');
-                $table->integer('media_id')->unsigned();
-                $table->integer('attached_to_id')->unsigned();
+                $table->bigInteger('media_id')->unsigned();
+                $table->bigInteger('attached_to_id')->unsigned();
                 $table->string('attached_to_type');
                 $table->string('options')->default('');
                 $table->boolean('main')->default(0);
